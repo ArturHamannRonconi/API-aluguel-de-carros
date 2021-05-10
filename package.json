@@ -19,6 +19,7 @@
     "typescript": "^4.2.4"
   },
   "scripts": {
-    "dev": "ts-node-dev --clear --transpile-only --ignore-watch node_modules --respawn src/server.ts"
+    "dev": "ts-node-dev --clear --transpile-only --ignore-watch node_modules --respawn src/server.ts",
+    "dev_debug": "ts-node-dev --inspect --clear --transpile-only --ignore-watch node_modules --respawn src/server.ts"
   }
 }
