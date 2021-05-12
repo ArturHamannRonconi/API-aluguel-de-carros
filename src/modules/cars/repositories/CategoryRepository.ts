@@ -1,12 +1,8 @@
 import Category from '../models/Category'
+import ICategoryRepository from '../interfaces/ICategoryRepository'
+import CreateCategory from '../@types/CreateCategory'
 
-interface ICreateCategory
-{
-  name: string
-  description: string
-}
-
-class CategoryRepository
+class CategoryRepository implements ICategoryRepository
 {
   private categories: Category[]
 
@@ -15,7 +11,7 @@ class CategoryRepository
     this.categories = []
   }
 
-  create({ name, description }: ICreateCategory)
+  create({ name, description }: CreateCategory): void
   {
     const category = new Category()
     Object.assign(category, {
@@ -41,4 +37,4 @@ class CategoryRepository
 
 }
 
-export default new CategoryRepository()
+export default CategoryRepository
