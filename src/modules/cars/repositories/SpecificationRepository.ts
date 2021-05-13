@@ -1,17 +1,18 @@
 import Specification from '../models/Specification'
-import ISpecificationRepository from '../interfaces/ISpecificationRepository'
+import ISpecificationRepository from './interfaces/ISpecificationRepository'
 import CreateSpecification from '../@types/CreateSpecification'
 
 class SpecificationRepository implements ISpecificationRepository
 {
   private specifications: Specification[]
+  private static INSTANCE: SpecificationRepository 
 
-  constructor()
+  private constructor()
   {
     this.specifications = []
   }
 
-  create({ name, description }: CreateSpecification): void
+  public create({ name, description }: CreateSpecification): void
   {
     const specification = new Specification()
 
@@ -24,15 +25,23 @@ class SpecificationRepository implements ISpecificationRepository
     this.specifications.push(specification)
   }
 
-  list(): Specification[]
+  public list(): Specification[]
   {
     return this.specifications
   }
 
-  findByName(name: string): Specification
+  public findByName(name: string): Specification
   {
     const specification = this.specifications.find(specification => specification.name === name)
     return specification
+  }
+
+  public static getInstance(): SpecificationRepository
+  {
+    if(!SpecificationRepository.INSTANCE)
+      SpecificationRepository.INSTANCE = new SpecificationRepository()
+
+    return SpecificationRepository.INSTANCE
   }
 }
 

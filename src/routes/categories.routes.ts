@@ -8,7 +8,7 @@ import {
 const categoriesRoutes = Router()
 
 categoriesRoutes.route('/categories')
-  .get(listCategoryController.execute)
-  .post(createCategoryController.execute)
+  .get(listCategoryController.execute.bind(listCategoryController))
+  .post(createCategoryController.execute.bind(createCategoryController))
   
 export default categoriesRoutes

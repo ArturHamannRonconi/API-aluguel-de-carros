@@ -1,13 +1,9 @@
-import SpecificationRepository from '../../repositories/SpecificationRepository'
-import CreateSpecificationService from '../../services/CreateSpecificationServices'
+import { listSpecificationService, createSpecificationService } from '../../services/specificationServices'
 
 import ListSpecificationController from './ListSpecificationController'
 import CreateSpecificationController from './CreateSpecificationController'
 
-const specificationRepository = new SpecificationRepository()
-const createSpecificationService = new CreateSpecificationService(specificationRepository)
-
-const listSpecificationController = new ListSpecificationController(specificationRepository)
+const listSpecificationController = new ListSpecificationController(listSpecificationService)
 const createSpecificationController = new CreateSpecificationController(createSpecificationService)
 
 export { listSpecificationController, createSpecificationController }

@@ -1,5 +1,5 @@
-import CreateSpecification from '../@types/CreateSpecification'
-import Specification from '../models/Specification'
+import CreateSpecification from '../../@types/CreateSpecification'
+import Specification from '../../models/Specification'
 
 interface ISpecificationRepository
 {

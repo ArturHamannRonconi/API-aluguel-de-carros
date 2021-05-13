@@ -2,7 +2,6 @@ import { Response } from 'express'
 
 class Controller
 {
-
   protected tryCatchJson(callback: CallableFunction, res: Response, statusCode: number): Response | void
   {
     try {

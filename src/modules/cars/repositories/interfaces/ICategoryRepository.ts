@@ -1,5 +1,5 @@
-import Category from '../models/Category'
-import CreateCategory from '../@types/CreateCategory'
+import Category from '../../models/Category'
+import CreateCategory from '../../@types/CreateCategory'
 
 interface ICategoryRepository
 {

@@ -1,14 +1,15 @@
 import { Request, Response } from 'express'
 
 import Controller from '../Controller'
-import CreateSpecificationServices from '../../services/CreateSpecificationServices'
+import CreateSpecificationServices from '../../services/specificationServices/CreateSpecificationService'
 
 class CreateSpecificationController extends Controller
 {
   constructor(private createSpecificationService: CreateSpecificationServices) { super() }
 
-  execute(request: Request, response: Response): Response | void
+  public execute(request: Request, response: Response): Response | void
   {
+    console.log(this)
     return super.tryCatchEnd(() => {
       const { name, description } = request.body
       this.createSpecificationService.execute({ name, description })

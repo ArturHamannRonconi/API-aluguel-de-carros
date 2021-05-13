@@ -1,15 +1,15 @@
 import { Request, Response } from 'express'
 
 import Controller from '../Controller'
-import ICategoryRepository from '../../interfaces/ICategoryRepository'
+import ListCategoryService from '../../services/categoryServices/ListCategoryService'
 
 class ListCategoryController extends Controller
 {
-  constructor(private categoryRepository: ICategoryRepository) { super() }
+  constructor(private listCategoryService: ListCategoryService) { super() }
 
-  execute(request: Request, response: Response): Response | void
+  public execute(request: Request, response: Response): Response | void
   {
-    return super.tryCatchJson(() => this.categoryRepository.list(), response, 200)
+    return super.tryCatchJson(() => this.listCategoryService.execute(), response, 200)
   }
 }
 

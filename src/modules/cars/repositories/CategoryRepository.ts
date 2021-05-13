@@ -1,17 +1,18 @@
 import Category from '../models/Category'
-import ICategoryRepository from '../interfaces/ICategoryRepository'
+import ICategoryRepository from './interfaces/ICategoryRepository'
 import CreateCategory from '../@types/CreateCategory'
 
 class CategoryRepository implements ICategoryRepository
 {
   private categories: Category[]
+  private static INSTANCE: CategoryRepository
 
-  constructor()
+  private constructor()
   {
     this.categories = []
   }
 
-  create({ name, description }: CreateCategory): void
+  public create({ name, description }: CreateCategory): void
   {
     const category = new Category()
     Object.assign(category, {
@@ -23,18 +24,25 @@ class CategoryRepository implements ICategoryRepository
     this.categories.push(category)
   }
 
-  list(): Category[]
+  public list(): Category[]
   {
     return this.categories
   }
 
-  findByName(name: string): Category
+  public findByName(name: string): Category
   {
     const category = this.categories.find(category => category.name === name)
 
     return category
   }
 
+  public static getInstance(): CategoryRepository
+  {
+    if(!CategoryRepository.INSTANCE)
+      CategoryRepository.INSTANCE = new CategoryRepository()
+     
+    return CategoryRepository.INSTANCE
+  }
 }
 
 export default CategoryRepository

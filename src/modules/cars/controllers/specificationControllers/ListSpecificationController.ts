@@ -1,15 +1,15 @@
 import { Request, Response } from 'express'
 
 import Controller from '../Controller'
-import ISpecificationRepository from '../../interfaces/ISpecificationRepository'
+import ListSpecificationService from '../../services/specificationServices/ListSpecificationService'
 
 class ListSpecificationController extends Controller
 {
-  constructor(private specificationRepository: ISpecificationRepository) { super() }
+  constructor(private listSpecificationService: ListSpecificationService) { super() }
 
-  execute(request: Request, response: Response): Response | void
+  public execute(request: Request, response: Response): Response | void
   {
-    return super.tryCatchJson(() => this.specificationRepository.list(), response, 200)
+    return super.tryCatchJson(() => this.listSpecificationService.execute(), response, 200)
   }
 }
 

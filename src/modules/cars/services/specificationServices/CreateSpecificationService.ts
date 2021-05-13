@@ -1,11 +1,11 @@
-import ISpecificationRepository from '../interfaces/ISpecificationRepository'
-import CreateSpecification from '../@types/CreateSpecification'
+import ISpecificationRepository from '../../repositories/interfaces/ISpecificationRepository'
+import CreateSpecification from '../../@types/CreateSpecification'
 
 class CreateSpecificationServices
 {
   constructor(private specificationRepository: ISpecificationRepository) {  }
 
-  execute({ name, description }: CreateSpecification): void
+  public execute({ name, description }: CreateSpecification): void
   {
     const specificationExists = this.specificationRepository.findByName(name)
     
