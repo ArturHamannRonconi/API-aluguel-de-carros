@@ -7,9 +7,9 @@ class CreateCategoryController extends Controller
 {
   constructor(private createCategoryServices: CreateCategoryServices) { super() }
 
-  public execute(request: Request, response: Response): Response | void
+  public handle(request: Request, response: Response): Response | void
   {
-    return super.tryCatchEnd(() => {
+    return super.syncTryCatchEnd(() => {
       const { name, description } = request.body
       this.createCategoryServices.execute({ name, description })
     }, response, 201)

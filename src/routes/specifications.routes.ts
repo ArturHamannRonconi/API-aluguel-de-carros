@@ -8,7 +8,7 @@ import {
 const specificationsRoutes = Router()
 
 specificationsRoutes.route('/specifications')
-  .get(listSpecificationController.execute.bind(listSpecificationController))
-  .post(createSpecificationController.execute.bind(createSpecificationController))
+  .get((req, res) => listSpecificationController.handle(req, res))
+  .post((req, res) => createSpecificationController.handle(req, res))
 
 export default specificationsRoutes

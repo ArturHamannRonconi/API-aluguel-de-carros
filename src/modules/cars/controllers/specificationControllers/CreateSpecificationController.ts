@@ -7,10 +7,9 @@ class CreateSpecificationController extends Controller
 {
   constructor(private createSpecificationService: CreateSpecificationServices) { super() }
 
-  public execute(request: Request, response: Response): Response | void
+  public handle(request: Request, response: Response): Response | void
   {
-    console.log(this)
-    return super.tryCatchEnd(() => {
+    return super.syncTryCatchEnd(() => {
       const { name, description } = request.body
       this.createSpecificationService.execute({ name, description })
     }, response, 201)

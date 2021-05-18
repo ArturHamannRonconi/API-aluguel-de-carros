@@ -7,9 +7,9 @@ class ListCategoryController extends Controller
 {
   constructor(private listCategoryService: ListCategoryService) { super() }
 
-  public execute(request: Request, response: Response): Response | void
+  public handle(request: Request, response: Response): Response | void
   {
-    return super.tryCatchJson(() => this.listCategoryService.execute(), response, 200)
+    return super.syncTryCatchJson(() => this.listCategoryService.execute(), response, 200)
   }
 }
 
