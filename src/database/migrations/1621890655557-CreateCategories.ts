@@ -11,7 +11,7 @@ export class CreateCategories1621890655557 implements MigrationInterface {
           { name: 'id', type: 'uuid', isPrimary: true, isGenerated: true },
           { name: 'name', type: 'varchar'},
           { name: 'description', type: 'varchar' },
-          { name: 'created_at', type: 'timestamp', default: 'NOW()' }
+          { name: 'created_at', type: 'timestamp', default: 'now()' }
         ]
       })
     )
@@ -19,7 +19,6 @@ export class CreateCategories1621890655557 implements MigrationInterface {
 
   public async down(queryRunner: QueryRunner): Promise<void>
   {
-    queryRunner.dropTable('categories')
+    await queryRunner.dropTable('categories')
   }
-
 }
