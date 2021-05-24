@@ -1,4 +1,4 @@
-import e, { Request, Response } from 'express'
+import { Request, Response } from 'express'
 
 import Controller from '../Controller'
 import CreateCategoryServices from '../../services/categoryServices/CreateCategoryService'
