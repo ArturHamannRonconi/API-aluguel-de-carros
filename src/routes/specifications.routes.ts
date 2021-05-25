@@ -1,17 +1,16 @@
 import { Router } from 'express'
 
-import specificationControllers from '../modules/cars/controllers/specificationControllers'
+import ListSpecificationController from '../modules/cars/controllers/specificationControllers/ListSpecificationController'
+import CreateSpecificationController from '../modules/cars/controllers/specificationControllers/CreateSpecificationController'
 
 const specificationsRoutes = Router()
 
+
+const listSpecificationController = new ListSpecificationController()
+const createSpecificationController = new CreateSpecificationController()
+
 specificationsRoutes.route('/specifications')
-  .get((req, res) =>
-    specificationControllers()
-      .listSpecificationController.handle(req, res)
-  )
-  .post((req, res) =>
-    specificationControllers()
-      .createSpecificationController.handle(req, res)
-  )
+  .get(listSpecificationController.handle)
+  .post(createSpecificationController.handle)
 
 export default specificationsRoutes

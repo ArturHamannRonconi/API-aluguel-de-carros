@@ -1,15 +1,23 @@
 import { Request, Response } from 'express'
+import { container } from 'tsyringe'
 
-import Controller from '../Controller'
 import ListSpecificationService from '../../services/specificationServices/ListSpecificationService'
 
-class ListSpecificationController extends Controller
+class ListSpecificationController
 {
-  constructor(private listSpecificationService: ListSpecificationService) { super() }
-
   public async handle(request: Request, response: Response): Promise<Response | void>
   {
-    return await super.tryCatchJson(async () => await this.listSpecificationService.execute(), response, 200)
+    try {
+      const listSpecificationService = container.resolve(ListSpecificationService)
+      
+      const specifications = await listSpecificationService.execute()
+      return response.status(200).json(specifications)
+
+    } catch (error) {
+      const [ statusCodeError, message ] = error.message.split('/')
+
+      return response.status(statusCodeError).json({ error: message })
+    }
   }
 }
 

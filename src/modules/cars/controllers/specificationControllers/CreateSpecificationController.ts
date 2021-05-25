@@ -1,18 +1,24 @@
 import { Request, Response } from 'express'
+import { container } from 'tsyringe'
 
-import Controller from '../Controller'
 import CreateSpecificationServices from '../../services/specificationServices/CreateSpecificationService'
 
-class CreateSpecificationController extends Controller
+class CreateSpecificationController
 {
-  constructor(private createSpecificationService: CreateSpecificationServices) { super() }
-
   public async handle(request: Request, response: Response): Promise<Response | void>
   {
-    return await super.tryCatchEnd(async () => {
+    try {
       const { name, description } = request.body
-      await this.createSpecificationService.execute({ name, description })
-    }, response, 201)
+      const createSpecificationService = container.resolve(CreateSpecificationServices)
+      
+      await createSpecificationService.execute({ name, description })
+      return response.status(201).end()
+
+    } catch (error) {
+      const [ statusCodeError, message ] = error.message.split('/')
+
+      return response.status(statusCodeError).json({ error: message })
+    }
   }
 }
 

@@ -1,15 +1,22 @@
 import { Request, Response } from 'express'
+import { container } from 'tsyringe'
 
-import Controller from '../Controller'
 import ListCategoryService from '../../services/categoryServices/ListCategoryService'
 
-class ListCategoryController extends Controller
+class ListCategoryController
 {
-  constructor(private listCategoryService: ListCategoryService) { super() }
-
   public async handle(request: Request, response: Response): Promise<Response | void>
   {
-    return await super.tryCatchJson(async () => await this.listCategoryService.execute(), response, 200)
+    try {
+      const listCategoryService = container.resolve(ListCategoryService) 
+      const categories = await listCategoryService.execute()
+      return response.status(200).json(categories)
+
+    } catch (error) {
+      const [ statusCodeError, message ] = error.message.split('/')
+
+      return response.status(statusCodeError).json({ error: message })
+    }
   }
 }
 

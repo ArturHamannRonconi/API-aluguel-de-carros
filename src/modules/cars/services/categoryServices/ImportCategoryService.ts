@@ -1,12 +1,17 @@
 import fs from 'fs'
 import csvParse from 'csv-parse'
+import { inject, injectable } from 'tsyringe'
 
 import ICategoryRepository from '../../repositories/interfaces/ICategoryRepository'
 import ImportCategory from '../../@types/ImportCategory'
 
+@injectable()
 class ImportCategoryService
 {
-  constructor(private categoryRepository: ICategoryRepository) {  }
+  constructor(
+    @inject('CategoryRepository')
+    private categoryRepository: ICategoryRepository
+  ) {  }
 
   private loadCategories(file: Express.Multer.File): Promise<ImportCategory[]>
   {
@@ -19,11 +24,14 @@ class ImportCategoryService
       readStream.pipe(parseFile)
   
       parseFile
-        .on('end', () => resolve(categories))
         .on('error', err => reject(err))
         .on('data', async chunk => {
           const [ name, description ] = chunk
           categories.push({ name, description })
+        })
+        .on('end', () => {
+          this.deleteFile(file)
+          resolve(categories)
         })
     })
   }
@@ -36,16 +44,15 @@ class ImportCategoryService
   public async execute(file: Express.Multer.File): Promise<void>
   {
     const categories = await this.loadCategories(file)
-    categories.forEach(async category => {
+
+    for await (const category of categories) {
       const { name, description } = category
 
       const categoryExists = await this.categoryRepository.findByName(name)
       if(categoryExists) throw new Error('400/Category already exists')
-
+      
       await this.categoryRepository.create({ name, description })
-    })
-    
-    this.deleteFile(file)
+    }
   }
 }
 

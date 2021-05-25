@@ -1,9 +1,15 @@
+import { inject, injectable } from 'tsyringe'
+
 import Specification from '../../entities/Specification'
 import ISpecificationRepository from '../../repositories/interfaces/ISpecificationRepository'
 
+@injectable()
 class ListSpecificationService
 {
-  constructor(private specificationRepository: ISpecificationRepository) {  }
+  constructor(
+    @inject('SpecificationRepository')
+    private specificationRepository: ISpecificationRepository
+  ) {  }
 
   public async execute(): Promise<Specification[]>
   {

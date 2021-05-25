@@ -1,18 +1,23 @@
 import { Request, Response } from 'express'
+import { container } from 'tsyringe'
 
-import Controller from '../Controller'
 import CreateCategoryServices from '../../services/categoryServices/CreateCategoryService'
 
-class CreateCategoryController extends Controller
+class CreateCategoryController
 {
-  constructor(private createCategoryServices: CreateCategoryServices) { super() }
-
   public async handle(request: Request, response: Response): Promise<Response | void>
   {
-    return await super.tryCatchEnd(async () => {
+    try {
       const { name, description } = request.body
-      await this.createCategoryServices.execute({ name, description })
-    }, response, 201)
+      const createCategoryServices = container.resolve(CreateCategoryServices)
+
+      await createCategoryServices.execute({ name, description })
+      return response.status(201).end()
+    } catch (error) {
+      const [ statusCodeError, message ] = error.message.split('/')
+
+      return response.status(statusCodeError).json({ error: message })
+    }
   }
 }
 
