@@ -7,11 +7,11 @@ class CreateCategoryController extends Controller
 {
   constructor(private createCategoryServices: CreateCategoryServices) { super() }
 
-  public handle(request: Request, response: Response): Response | void
+  public async handle(request: Request, response: Response): Promise<Response | void>
   {
-    return super.syncTryCatchEnd(() => {
+    return await super.tryCatchEnd(async () => {
       const { name, description } = request.body
-      this.createCategoryServices.execute({ name, description })
+      await this.createCategoryServices.execute({ name, description })
     }, response, 201)
   }
 }

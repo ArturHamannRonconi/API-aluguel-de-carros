@@ -36,14 +36,15 @@ class ImportCategoryService
   public async execute(file: Express.Multer.File): Promise<void>
   {
     const categories = await this.loadCategories(file)
-    categories.forEach(category => {
+    categories.forEach(async category => {
       const { name, description } = category
 
-      const categoryExists = this.categoryRepository.findByName(name)
+      const categoryExists = await this.categoryRepository.findByName(name)
       if(categoryExists) throw new Error('400/Category already exists')
 
-      this.categoryRepository.create({ name, description })
+      await this.categoryRepository.create({ name, description })
     })
+    
     this.deleteFile(file)
   }
 }

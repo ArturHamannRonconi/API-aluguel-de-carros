@@ -3,10 +3,12 @@ import ListCategoryService from './ListCategoryService'
 import CreateCategoryService from './CreateCategoryService'
 import ImportCategoryService from './ImportCategoryService'
 
-const categoryRepository = CategoryRepository.getInstance()
+export default () => {
+  const categoryRepository = new CategoryRepository()
+  
+  const listCategoryService = new ListCategoryService(categoryRepository) 
+  const createCategoryService = new CreateCategoryService(categoryRepository) 
+  const importCategoryService = new ImportCategoryService(categoryRepository)
 
-const listCategoryService = new ListCategoryService(categoryRepository) 
-const createCategoryService = new CreateCategoryService(categoryRepository) 
-const importCategoryService = new ImportCategoryService(categoryRepository)
-
-export { listCategoryService, createCategoryService, importCategoryService }
+  return { listCategoryService, createCategoryService, importCategoryService }
+}

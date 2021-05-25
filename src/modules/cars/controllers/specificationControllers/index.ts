@@ -1,9 +1,15 @@
-import { listSpecificationService, createSpecificationService } from '../../services/specificationServices'
+import specificationServices from '../../services/specificationServices'
 
 import ListSpecificationController from './ListSpecificationController'
 import CreateSpecificationController from './CreateSpecificationController'
 
-const listSpecificationController = new ListSpecificationController(listSpecificationService)
-const createSpecificationController = new CreateSpecificationController(createSpecificationService)
-
-export { listSpecificationController, createSpecificationController }
+export default () => {
+  const listSpecificationController = new ListSpecificationController(
+    specificationServices().listSpecificationService
+  )
+  const createSpecificationController = new CreateSpecificationController(
+    specificationServices().createSpecificationService
+  )
+  
+  return { listSpecificationController, createSpecificationController }
+}

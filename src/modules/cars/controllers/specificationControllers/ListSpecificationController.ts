@@ -7,9 +7,9 @@ class ListSpecificationController extends Controller
 {
   constructor(private listSpecificationService: ListSpecificationService) { super() }
 
-  public handle(request: Request, response: Response): Response | void
+  public async handle(request: Request, response: Response): Promise<Response | void>
   {
-    return super.syncTryCatchJson(() => this.listSpecificationService.execute(), response, 200)
+    return await super.tryCatchJson(async () => await this.listSpecificationService.execute(), response, 200)
   }
 }
 

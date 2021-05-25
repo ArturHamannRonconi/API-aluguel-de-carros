@@ -5,14 +5,14 @@ class CreateSpecificationServices
 {
   constructor(private specificationRepository: ISpecificationRepository) {  }
 
-  public execute({ name, description }: CreateSpecification): void
+  public async execute({ name, description }: CreateSpecification): Promise<void>
   {
-    const specificationExists = this.specificationRepository.findByName(name)
+    const specificationExists = await this.specificationRepository.findByName(name)
     
     if(specificationExists)
       throw new Error('400/Specification already exists')
 
-    this.specificationRepository.create({ name, description })
+    await this.specificationRepository.create({ name, description })
   }
 
 }

@@ -1,13 +1,13 @@
-import Category from '../../models/Category'
+import Category from '../../entities/Category'
 import ICategoryRepository from '../../repositories/interfaces/ICategoryRepository'
 
 class ListCategoryService
 {
   constructor(private categoryRepository: ICategoryRepository) {  }
 
-  public execute(): Category[]
+  public async execute(): Promise<Category[]>
   {
-    return this.categoryRepository.list()
+    return await this.categoryRepository.list()
   }
 }
 

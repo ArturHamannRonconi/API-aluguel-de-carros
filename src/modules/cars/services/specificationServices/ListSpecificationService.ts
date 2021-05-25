@@ -1,13 +1,13 @@
-import Specification from '../../models/Specification'
+import Specification from '../../entities/Specification'
 import ISpecificationRepository from '../../repositories/interfaces/ISpecificationRepository'
 
 class ListSpecificationService
 {
   constructor(private specificationRepository: ISpecificationRepository) {  }
 
-  public execute(): Specification[]
+  public async execute(): Promise<Specification[]>
   {
-    return this.specificationRepository.list()
+    return await this.specificationRepository.list()
   }
 }
 

@@ -1,15 +1,20 @@
-import {
-  listCategoryService,
-  createCategoryService,
-  importCategoryService
-} from '../../services/categoryServices'
+import categoryServices from '../../services/categoryServices'
 
 import ListCategoryController from './ListCategoryController'
 import CreateCategoryController from './CreateCategoryController'
 import ImportCategoryController from './ImportCategoryController'
 
-const listCategoryController = new ListCategoryController(listCategoryService)
-const createCategoryController = new CreateCategoryController(createCategoryService)
-const importCategoryController = new ImportCategoryController(importCategoryService)
+export default () => {
 
-export { listCategoryController, createCategoryController, importCategoryController }
+  const listCategoryController = new ListCategoryController(
+    categoryServices().listCategoryService
+  )
+  const createCategoryController = new CreateCategoryController(
+    categoryServices().createCategoryService
+  )
+  const importCategoryController = new ImportCategoryController(
+    categoryServices().importCategoryService
+  )
+  
+  return { listCategoryController, createCategoryController, importCategoryController }
+}

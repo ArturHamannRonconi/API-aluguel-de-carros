@@ -7,9 +7,9 @@ class ImportCategoryController extends Controller
 {
   constructor(private importCategoryService: ImportCategoryService) { super() }
 
-  async handle(request: Request, response: Response): Promise<Response | void> 
+  public async handle(request: Request, response: Response): Promise<Response | void> 
   {
-    return super.tryCatchEnd(async () => {
+    return await super.tryCatchEnd(async () => {
       const { file } = request
       await this.importCategoryService.execute(file)
     }, response, 200)
