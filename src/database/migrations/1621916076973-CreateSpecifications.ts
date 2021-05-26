@@ -9,8 +9,8 @@ export class CreateSpecifications1621916076973 implements MigrationInterface
         name: 'specifications',
         columns: [
           { name: 'id', type: 'uuid', isPrimary: true, default: 'gen_random_uuid()' },
-          { name: 'name', type: 'varchar' },
-          { name: 'description', type: 'varchar' },
+          { name: 'name', type: 'varchar', isNullable: false },
+          { name: 'description', type: 'varchar', isNullable: false },
           { name: 'created_at', type: 'timestamp', default: 'now()' }
         ]
       })
@@ -19,6 +19,7 @@ export class CreateSpecifications1621916076973 implements MigrationInterface
 
   public async down(queryRunner: QueryRunner): Promise<void>
   {
+    await queryRunner.clearTable('specifications')
     await queryRunner.dropTable('specifications')
   }
 }
