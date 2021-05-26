@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Rentalx Documentation",
+    "title": "Rentx Documentation",
     "description": "This is an API Rent",
     "version": "1.0.0",
     "contact": { "email": "arturhronconi@gmail.com" }
@@ -20,11 +20,11 @@
                 "properties": {
                   "name": { "type": "string" },
                   "description": { "type": "string" }
-                },
-                "example": {
-                  "name": "SUV",
-                  "description": "Car SUV category"
                 }
+              },
+              "example": {
+                "name": "SUV",
+                "description": "Car SUV category"
               }
             }
           }
@@ -52,10 +52,104 @@
                       "description": { "type": "string" }
                     }
                   }
+                },
+                "example": [
+                  {
+                    "id": "71ad19ae-07d3-4d88-9062-21b8dea4c646",
+                    "name": "SUV",
+                    "description": " Utilitario esportivo",
+                    "created_at": "2021-05-26T03:17:17.707Z"
+                  },
+                  {
+                    "id": "fac58a2f-9f23-4284-a582-a5ca8fa17803",
+                    "name": "Sedan",
+                    "description": " Automovel de 3 volumes",
+                    "created_at": "2021-05-26T03:17:17.756Z"
+                  },
+                  {
+                    "id": "29bf6364-910b-459e-8808-2929ec6badfb",
+                    "name": "Hatch",
+                    "description": " Carro curto",
+                    "created_at": "2021-05-26T03:17:17.805Z"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categories/import": {
+      "post": {
+        "tags": ["Category"],
+        "summary": "Upload new category",
+        "description": "Upload new category",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                  "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
                 }
               }
             }
           }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Some category already exists"
+          }
+        }
+      }
+    },
+    "/specifications": {
+      "post": {
+        "tags": ["Specification"],
+        "summary": "Create a specification",
+        "description": "Create a new specification",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Specification"
+              },
+              "example": {
+                "name": "SUV",
+                "description": "SUV specification"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Specification already exists"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Specification"]
+      }
+    }
+  },
+  "definitions": {
+    "Specification": {
+      "type": "Object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
         }
       }
     }
