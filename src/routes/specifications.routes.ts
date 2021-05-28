@@ -5,7 +5,6 @@ import CreateSpecificationController from '../modules/cars/controllers/specifica
 
 const specificationsRoutes = Router()
 
-
 const listSpecificationController = new ListSpecificationController()
 const createSpecificationController = new CreateSpecificationController()
 
