@@ -1,0 +1,34 @@
+import { hash, genSalt } from 'bcrypt'
+import { inject, injectable } from 'tsyringe'
+
+import IUserRepository from '../../repositories/interfaces/IUserRepository'
+import CreateUser from '../../@types/CreateUser'
+import AppError from '../../../../errors/AppError'
+
+@injectable()
+class CreateUserService
+{
+  constructor(
+    @inject('UserRepository')
+    private userRepository: IUserRepository
+  ) {  }
+
+  public async execute(userData: CreateUser): Promise<void>
+  {
+    const [ emaiAlreadyExists, usernameAlreadyExists ] = await Promise.all([
+      this.userRepository.findByEmail(userData.email),
+      this.userRepository.findByUsername(userData.username)
+    ])
+    
+    if(emaiAlreadyExists) throw new AppError('Email already registered')
+    if(usernameAlreadyExists) throw new AppError('Username already exists')
+    
+    const salt = await genSalt(10)
+    const password = await hash(userData.password, salt)
+    Object.assign(userData, { password })
+
+    await this.userRepository.create(userData)
+  }
+}
+
+export default CreateUserService
