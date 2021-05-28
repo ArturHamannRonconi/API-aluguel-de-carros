@@ -14,8 +14,9 @@ export class CreateUsers1622001911933 implements MigrationInterface
           { name: 'username', type: 'varchar', isNullable: false, isUnique: true },
           { name: 'email', type: 'varchar', isNullable: false, isUnique: true },
           { name: 'password', type: 'varchar', isNullable: false },
-          { name: 'driver_licence', type: 'varchar', isNullable: false },
+          { name: 'driver_license', type: 'varchar', isNullable: false },
           { name: 'is_admin', type: 'boolean', default: false },
+          { name: 'avatar', type: 'varchar', isNullable: true },
           { name: 'created_at', type: 'timestamp', default: 'now()' }
         ]
       })
