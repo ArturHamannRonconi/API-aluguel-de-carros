@@ -2,6 +2,7 @@ import { inject, injectable } from 'tsyringe'
 
 import ISpecificationRepository from '../../repositories/interfaces/ISpecificationRepository'
 import CreateSpecification from '../../@types/CreateSpecification'
+import AppError from '../../../../errors/AppError'
 
 @injectable()
 class CreateSpecificationServices
@@ -16,7 +17,7 @@ class CreateSpecificationServices
     const specificationExists = await this.specificationRepository.findByName(name)
     
     if(specificationExists)
-      throw new Error('400/Specification already exists')
+      throw new AppError('Specification already exists')
 
     await this.specificationRepository.create({ name, description })
   }

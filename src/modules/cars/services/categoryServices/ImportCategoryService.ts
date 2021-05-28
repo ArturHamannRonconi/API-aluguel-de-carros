@@ -4,6 +4,8 @@ import { inject, injectable } from 'tsyringe'
 
 import ICategoryRepository from '../../repositories/interfaces/ICategoryRepository'
 import ImportCategory from '../../@types/ImportCategory'
+import AppError from '../../../../errors/AppError'
+import FileUtil from '../../../../utils/FileUtil'
 
 @injectable()
 class ImportCategoryService
@@ -25,20 +27,21 @@ class ImportCategoryService
   
       parseFile
         .on('error', err => reject(err))
-        .on('data', async chunk => {
+        .on('data', chunk => {
           const [ name, description ] = chunk
           categories.push({ name, description })
         })
-        .on('end', () => {
-          this.deleteFile(file)
+        .on('end', async () => {
+          await this.deleteTempFile(file.path)
           resolve(categories)
         })
     })
   }
 
-  private deleteFile(file: Express.Multer.File): void
+  private async deleteTempFile(path: string): Promise<void>
   {
-    fs.unlinkSync(file.path)
+    const fileUtil = new FileUtil()
+    await fileUtil.deleteFile(path)
   }
 
   public async execute(file: Express.Multer.File): Promise<void>
@@ -47,9 +50,9 @@ class ImportCategoryService
 
     for await (const category of categories) {
       const { name, description } = category
-
+      
       const categoryExists = await this.categoryRepository.findByName(name)
-      if(categoryExists) throw new Error('400/Category already exists')
+      if(categoryExists) throw new AppError('Category already exists')
       
       await this.categoryRepository.create({ name, description })
     }
