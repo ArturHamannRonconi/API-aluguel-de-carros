@@ -1,8 +1,9 @@
+import 'reflect-metadata'
 import { inject, injectable } from 'tsyringe'
 
-import ISpecificationRepository from '../../repositories/interfaces/ISpecificationRepository'
-import CreateSpecification from '../../@types/CreateSpecification'
-import AppError from '../../../../errors/AppError'
+import ISpecificationRepository from '@cars/repositories/interfaces/ISpecificationRepository'
+import CreateSpecification from '@myTypes/CreateSpecification'
+import AppError from '@shared/errors/AppError'
 
 @injectable()
 class CreateSpecificationServices

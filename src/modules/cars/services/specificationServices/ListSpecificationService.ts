@@ -1,7 +1,8 @@
+import 'reflect-metadata'
 import { inject, injectable } from 'tsyringe'
 
-import Specification from '../../entities/Specification'
-import ISpecificationRepository from '../../repositories/interfaces/ISpecificationRepository'
+import Specification from '@cars/infra/typeorm/entities/Specification'
+import ISpecificationRepository from '@cars/repositories/interfaces/ISpecificationRepository'
 
 @injectable()
 class ListSpecificationService

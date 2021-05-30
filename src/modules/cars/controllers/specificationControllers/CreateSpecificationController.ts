@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
-import CreateSpecificationServices from '../../services/specificationServices/CreateSpecificationService'
+import CreateSpecificationServices from '@cars/services/specificationServices/CreateSpecificationService'
 
 class CreateSpecificationController
 {

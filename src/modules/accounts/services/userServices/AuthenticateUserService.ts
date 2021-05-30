@@ -1,12 +1,13 @@
-import { inject, injectable } from 'tsyringe'
+import 'reflect-metadata'
 import { compare } from 'bcrypt'
+import { inject, injectable } from 'tsyringe'
 import { SignOptions, Secret, sign } from 'jsonwebtoken'
 
-import IUserRepository from '../../repositories/interfaces/IUserRepository'
-import UserAccount from '../../@types/UserAccount'
-import Payload from '../../@types/Payload'
-import AuthenticateResponse from '../../@types/AuthenticateReponse'
-import AppError from '../../../../errors/AppError'
+import IUserRepository from '@accounts/repositories/interfaces/IUserRepository'
+import UserAccount from '@myTypes/UserAccount'
+import Payload from '@myTypes/Payload'
+import AuthenticateResponse from '@myTypes/AuthenticateReponse'
+import AppError from '@shared/errors/AppError'
 
 @injectable()
 class AuthenticateUserService

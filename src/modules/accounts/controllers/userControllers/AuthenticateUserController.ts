@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
-import AuthenticateUserService from '../../services/userServices/AuthenticateUserService'
-import UserAccount from '../../@types/UserAccount'
+import AuthenticateUserService from '@accounts/services/userServices/AuthenticateUserService'
+import UserAccount from '@myTypes/UserAccount'
 
 class AuthenticateUserController
 {

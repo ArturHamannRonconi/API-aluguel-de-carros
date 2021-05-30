@@ -1,11 +1,11 @@
-import CreateSpecification from '../../@types/CreateSpecification'
-import Specification from '../../entities/Specification'
+import ISpecification from '@cars/entities/interfaces/ISpecification'
+import CreateSpecification from '@myTypes/CreateSpecification'
 
 interface ISpecificationRepository
 {
   create({ name, description }: CreateSpecification): Promise<void>
-  list(): Promise<Specification[]>
-  findByName(name: string): Promise<Specification>
+  list(): Promise<ISpecification[]>
+  findByName(name: string): Promise<ISpecification>
 }
 
 export default ISpecificationRepository

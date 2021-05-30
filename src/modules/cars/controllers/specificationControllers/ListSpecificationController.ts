@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
-import ListSpecificationService from '../../services/specificationServices/ListSpecificationService'
+import ListSpecificationService from '@cars/services/specificationServices/ListSpecificationService'
 
 class ListSpecificationController
 {

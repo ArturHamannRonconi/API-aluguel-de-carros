@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
-import UpdateUserAvatarService from '../../services/userServices/UpdateUserAvatarService'
+import UpdateUserAvatarService from '@accounts/services/userServices/UpdateUserAvatarService'
 
 class UpdateUserAvatarController
 {

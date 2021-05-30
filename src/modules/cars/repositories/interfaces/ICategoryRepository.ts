@@ -1,11 +1,11 @@
-import Category from '../../entities/Category'
-import CreateCategory from '../../@types/CreateCategory'
+import ICategory from '@cars/entities/interfaces/ICategory'
+import CreateCategory from '@myTypes/CreateCategory'
 
 interface ICategoryRepository
 {
   create({ name, description }: CreateCategory): Promise<void>
-  list(): Promise<Category[]>
-  findByName(name: string): Promise<Category>
+  list(): Promise<ICategory[]>
+  findByName(name: string): Promise<ICategory>
 }
 
 export default ICategoryRepository

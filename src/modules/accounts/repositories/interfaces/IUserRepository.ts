@@ -1,17 +1,17 @@
-import User from '../../entities/User'
-import CreateUser from '../../@types/CreateUser'
-import UserAccount from '../../@types/UserAccount'
-import UserUpdate from '../../@types/UserUpdate'
+import IUser from '@accounts/entities/interfaces/IUser'
+import CreateUser from '@myTypes/CreateUser'
+import UserAccount from '@myTypes/UserAccount'
+import UserUpdate from '@myTypes/UserUpdate'
 
 interface IUserRepository
 {
-  create(User: CreateUser): Promise<void>
+  create(userData: CreateUser): Promise<void>
   update({ user_id, add_info }: UserUpdate): Promise<void>
-  list(): Promise<User[]>
-  findById(id: string): Promise<User>
-  findByEmail(email: string): Promise<User>
-  findByUsername(username: string): Promise<User>
-  verifyEmailAndUsernameExists({ email, username }: Omit<UserAccount, 'password'>): Promise<User>
+  list(): Promise<IUser[]>
+  findById(id: string): Promise<IUser>
+  findByEmail(email: string): Promise<IUser>
+  findByUsername(username: string): Promise<IUser>
+  verifyEmailAndUsernameExists({ email, username }: Omit<UserAccount, 'password'>): Promise<IUser>
 }
 
 export default IUserRepository

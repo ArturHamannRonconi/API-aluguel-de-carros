@@ -1,8 +1,9 @@
+import 'reflect-metadata'
 import { inject, injectable } from 'tsyringe'
 
-import IUserRepository from '../../repositories/interfaces/IUserRepository'
-import UserAvatar from '../../@types/UserAvatar'
-import FileUtil from '../../../../utils/FileUtil'
+import IUserRepository from '@accounts/repositories/interfaces/IUserRepository'
+import UserAvatar from '@myTypes/UserAvatar'
+import FileUtil from '@utils/FileUtil'
 
 @injectable()
 class UpdateUserAvatarService

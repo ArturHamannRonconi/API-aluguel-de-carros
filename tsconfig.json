@@ -8,6 +8,15 @@
     "emitDecoratorMetadata": true,               
     "skipLibCheck": true,                           
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@accounts/*": ["modules/accounts/*"], 
+      "@cars/*": ["modules/cars/*"], 
+      "@config/*": ["config/*"], 
+      "@utils/*": ["utils/*"],
+      "@shared/*": ["shared/*"],
+      "@myTypes/*": ["@types/myTypes/*"]
+    }
   }
 }

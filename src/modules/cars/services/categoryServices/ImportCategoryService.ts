@@ -1,11 +1,12 @@
 import fs from 'fs'
+import 'reflect-metadata'
 import csvParse from 'csv-parse'
 import { inject, injectable } from 'tsyringe'
 
-import ICategoryRepository from '../../repositories/interfaces/ICategoryRepository'
-import ImportCategory from '../../@types/ImportCategory'
-import AppError from '../../../../errors/AppError'
-import FileUtil from '../../../../utils/FileUtil'
+import ICategoryRepository from '@cars/repositories/interfaces/ICategoryRepository'
+import ImportCategory from '@myTypes/ImportCategory'
+import AppError from '@shared/errors/AppError'
+import FileUtil from '@utils/FileUtil'
 
 @injectable()
 class ImportCategoryService

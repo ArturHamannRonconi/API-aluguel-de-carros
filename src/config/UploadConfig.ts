@@ -2,9 +2,6 @@ import multer from 'multer'
 import crypto from 'crypto'
 import { resolve } from 'path'
 
-
-multer()
-
 class UploadConfig
 {
   public options(folder: string): multer.Options

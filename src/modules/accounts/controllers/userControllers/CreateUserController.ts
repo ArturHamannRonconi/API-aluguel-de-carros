@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
-import CreateUserService from '../../services/userServices/CreateUserService'
-import CreateUser from '../../@types/CreateUser'
+import CreateUserService from '@accounts/services/userServices/CreateUserService'
+import CreateUser from '@myTypes/CreateUser'
 
 class CreateUserController
 {
@@ -11,8 +11,8 @@ class CreateUserController
     const { name, username, email, password, driver_license } = request.body as CreateUser
 
     const createUserService = container.resolve(CreateUserService)
-    await createUserService.execute({ name, username, email, password, driver_license })
 
+    await createUserService.execute({ name, username, email, password, driver_license })
     return response.status(201).end()
   }
 }
