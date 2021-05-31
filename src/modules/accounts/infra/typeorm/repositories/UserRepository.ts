@@ -4,7 +4,7 @@ import User from '@accounts/infra/typeorm/entities/User'
 import CreateUser from '@myTypes/CreateUser'
 import UserAccount from '@myTypes/UserAccount'
 import UserUpdate from '@myTypes/UserUpdate'
-import IUser from '@accounts/entities/interfaces/IUser'
+import IUser from '@accounts/entities/IUser'
 import IUserRepository from '@accounts/repositories/interfaces/IUserRepository'
 
 class UserRepository implements IUserRepository

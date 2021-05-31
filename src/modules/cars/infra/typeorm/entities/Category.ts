@@ -1,6 +1,6 @@
 import { Column, Entity, CreateDateColumn, PrimaryColumn } from 'typeorm'
 
-import ICategory from '@cars/entities/interfaces/ICategory'
+import ICategory from '@cars/entities/ICategory'
 
 @Entity('categories')
 class Category implements ICategory

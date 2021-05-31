@@ -3,9 +3,9 @@ import { v4 as generateUUID } from 'uuid'
 import CreateUser from '@myTypes/CreateUser'
 import UserAccount from '@myTypes/UserAccount'
 import UserUpdate from '@myTypes/UserUpdate'
-import IUser from '@accounts/entities/interfaces/IUser'
+import IUser from '@accounts/entities/IUser'
 import IUserRepository from '../interfaces/IUserRepository'
-import UserInMeMory from '@accounts/entities/in-memeory/UserInMemory'
+import User from '@accounts/infra/typeorm/entities/User'
 
 class UserRepositoryInMemory implements IUserRepository
 {
@@ -18,7 +18,7 @@ class UserRepositoryInMemory implements IUserRepository
 
   public async create(userData: CreateUser): Promise<void>
   {
-    const user = new UserInMeMory()
+    const user = new User()
 
     Object.assign(user, {
       ...userData,
@@ -44,26 +44,22 @@ class UserRepositoryInMemory implements IUserRepository
   
   public async findById(id: string): Promise<IUser>
   {
-    const user = this.repository.find(user => user.id === id)
-    return user
+    return this.repository.find(user => user.id === id)
   }
   
   public async findByEmail(email: string): Promise<IUser>
   {
-    const user = this.repository.find(user => user.email === email)
-    return user
+    return this.repository.find(user => user.email === email)
   }
   
   public async findByUsername(username: string): Promise<IUser>
   {
-    const user = this.repository.find(user => user.username === username)
-    return user
+    return this.repository.find(user => user.username === username)
   }
   
   public async verifyEmailAndUsernameExists({ email, username }: Omit<UserAccount, 'password'>): Promise<IUser>
   {
-    const user = this.repository.find(user => user.username === username && user.email === email)
-    return user
+    return this.repository.find(user => user.username === username && user.email === email)
   }
 }
 

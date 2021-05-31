@@ -1,6 +1,6 @@
 import { getRepository, Repository } from 'typeorm'
 
-import ISpecification from '@cars/entities/interfaces/ISpecification'
+import ISpecification from '@cars/entities/ISpecification'
 import Specification from '@cars/infra/typeorm/entities/Specification'
 import ISpecificationRepository from '@cars/repositories/interfaces/ISpecificationRepository'
 import CreateSpecification from '@myTypes/CreateSpecification'

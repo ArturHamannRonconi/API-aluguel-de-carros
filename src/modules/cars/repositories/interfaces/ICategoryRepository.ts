@@ -1,4 +1,4 @@
-import ICategory from '@cars/entities/interfaces/ICategory'
+import ICategory from '@cars/entities/ICategory'
 import CreateCategory from '@myTypes/CreateCategory'
 
 interface ICategoryRepository

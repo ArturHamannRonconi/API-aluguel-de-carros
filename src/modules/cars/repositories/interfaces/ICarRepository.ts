@@ -1,10 +1,11 @@
-import ICar from '@cars/entities/interfaces/ICar'
+import ICar from '@cars/entities/ICar'
+import CreateCar from '@myTypes/CreateCar'
 
 interface ICarRepository
 {
-  create(): Promise<void>
-  list(): Promise<ICar>
-  findByName(name: string): Promise<ICar>
+  create(createCarAttributes: CreateCar): Promise<void>
+  list(): Promise<ICar[]>
+  findByLicensePlate(license_plate: string): Promise<ICar>
 }
 
 export default ICarRepository

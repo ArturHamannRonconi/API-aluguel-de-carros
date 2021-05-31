@@ -1,9 +1,9 @@
 import { v4 as generateUUID } from 'uuid'
 
 import CreateCategory from '@myTypes/CreateCategory'
-import CategoryInMemory from '@cars/entities/in-memory/CategoryInMemory'
-import ICategory from '@cars/entities/interfaces/ICategory'
+import ICategory from '@cars/entities/ICategory'
 import ICategoryRepository from '../interfaces/ICategoryRepository'
+import Category from '@cars/infra/typeorm/entities/Category'
 
 class CategoryRepositoryInMemory implements ICategoryRepository
 {
@@ -16,7 +16,7 @@ class CategoryRepositoryInMemory implements ICategoryRepository
 
   public async create({ name, description }: CreateCategory): Promise<void>
   {
-    const category = new CategoryInMemory()
+    const category = new Category()
     
     Object.assign(category, {
       id: generateUUID(),
@@ -35,8 +35,7 @@ class CategoryRepositoryInMemory implements ICategoryRepository
 
   public async findByName(name: string): Promise<ICategory>
   {
-    const category = this.categories.find(category => category.name === name)
-    return category
+    return this.categories.find(category => category.name === name)
   }
 }
 

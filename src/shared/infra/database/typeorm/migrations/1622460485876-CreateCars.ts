@@ -12,11 +12,11 @@ export class CreateCars1622460485876 implements MigrationInterface
           { name: 'name', type: 'varchar' },
           { name: 'description', type: 'varchar' },
           { name: 'daily_rate', type: 'numeric' },
-          { name: 'avaliable', type: 'boolean', default: true },
+          { name: 'available', type: 'boolean', default: true },
           { name: 'license_plate', type: 'varchar' },
           { name: 'fine_amount', type: 'numeric' },
           { name: 'brand', type: 'varchar' },
-          { name: 'category', type: 'uuid', isNullable: true },
+          { name: 'category_id', type: 'uuid', isNullable: true },
           { name: 'created_at', type: 'timestamp', default: 'now()' }
         ],
         foreignKeys: [

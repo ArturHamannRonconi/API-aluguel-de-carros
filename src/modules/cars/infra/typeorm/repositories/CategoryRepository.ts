@@ -1,6 +1,6 @@
 import { getRepository, Repository } from 'typeorm'
 
-import ICategory from '@cars/entities/interfaces/ICategory'
+import ICategory from '@cars/entities/ICategory'
 import Category from '@cars/infra/typeorm/entities/Category'
 import ICategoryRepository from '@cars/repositories/interfaces/ICategoryRepository'
 import CreateCategory from '@myTypes/CreateCategory'

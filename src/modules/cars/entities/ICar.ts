@@ -6,11 +6,11 @@ interface ICar
   name: string
   description: string
   daily_rate: number
-  avaliable: boolean
+  available: boolean
   license_plate: string
   fine_amount: number
   brand: string
-  category: ICategory
+  category_id: string
   created_at: Date
 }
 

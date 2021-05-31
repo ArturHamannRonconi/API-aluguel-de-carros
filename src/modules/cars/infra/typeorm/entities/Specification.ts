@@ -1,6 +1,6 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm'
 
-import ISpecification from '@cars/entities/interfaces/ISpecification'
+import ISpecification from '@cars/entities/ISpecification'
 
 @Entity('specifications')
 class Specification implements ISpecification

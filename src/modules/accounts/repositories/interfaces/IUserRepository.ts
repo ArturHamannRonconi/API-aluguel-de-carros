@@ -1,4 +1,4 @@
-import IUser from '@accounts/entities/interfaces/IUser'
+import IUser from '@accounts/entities/IUser'
 import CreateUser from '@myTypes/CreateUser'
 import UserAccount from '@myTypes/UserAccount'
 import UserUpdate from '@myTypes/UserUpdate'

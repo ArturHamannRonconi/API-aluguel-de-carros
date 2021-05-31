@@ -29,16 +29,8 @@ class AuthenticateUserService
     const privateKey: Secret = '7a08a0940a9343e60c812a9a70ea65cb'
     const options: SignOptions = { subject: user.id, expiresIn: '1d' }
 
-    const authenticateTokenReturn: AuthenticateResponse = {
-      token: sign(payload, privateKey, options),
-      user: {
-        name: user.name,
-        username,
-        email
-      }
-    }
 
-    return authenticateTokenReturn
+    return { token: sign(payload, privateKey, options) }
   }
 }
 

@@ -5,23 +5,24 @@ import UserRepositoryInMemory from '@accounts/repositories/in-memory/UserReposit
 import AuthenticateUserService from '@accounts/services/userServices/AuthenticateUserService'
 import CreateUserService from '@accounts/services/userServices/CreateUserService'
 
+let authenticateUserService: AuthenticateUserService
+let userRepository: IUserRepository
+let createUserService: CreateUserService
+
+const user: CreateUser = {
+  name: 'User Test',
+  username: 'userTest',
+  email: 'user@test.com',
+  password: '123456789',
+  driver_license: '000123'
+}
+
 describe('Authenticate User', () => {
-  let authenticateUserService: AuthenticateUserService
-  let userRepositoryInMemory: IUserRepository
-  let createUserService: CreateUserService
-  
-  const user: CreateUser = {
-    name: 'User Test',
-    username: 'userTest',
-    email: 'user@test.com',
-    password: '123456789',
-    driver_license: '000123'
-  }
   
   beforeEach(async () => {
-    userRepositoryInMemory = new UserRepositoryInMemory()
-    authenticateUserService = new AuthenticateUserService(userRepositoryInMemory)
-    createUserService = new CreateUserService(userRepositoryInMemory)
+    userRepository = new UserRepositoryInMemory()
+    authenticateUserService = new AuthenticateUserService(userRepository)
+    createUserService = new CreateUserService(userRepository)
     await createUserService.execute(user)
   })
   
@@ -33,11 +34,6 @@ describe('Authenticate User', () => {
     })
     
     expect(result).toHaveProperty('token')
-    expect(result.user).toMatchObject({
-      name: user.name,
-      email: user.email,
-      username: user.username
-    })
   })
   
   it('Should not be able authenticate when email is incorrect', async () => {
