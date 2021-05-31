@@ -6,7 +6,6 @@ class CategoryInMemory implements ICategory
   name: string;
   description: string;
   created_at: Date;
-  
 }
 
 export default CategoryInMemory
