@@ -1,29 +1,24 @@
 import { Router } from 'express'
 import multer from 'multer'
 
-import CreateUserController from '@accounts/controllers/userControllers/CreateUserController'
-import AuthenticateUserController from '@accounts/controllers/userControllers/AuthenticateUserController'
-import UpdateUserAvatarController from '@accounts/controllers/userControllers/UpdateUserAvatarController'
-import AuthenticationHandler from '../middlewares/AuthenticationHandler'
+import authenticationHandler from '@shared/infra/http/middlewares/AuthenticationHandler'
+import createUserController from '@accounts/controllers/userControllers/CreateUserController'
+import authenticateUserController from '@accounts/controllers/userControllers/AuthenticateUserController'
+import updateUserAvatarController from '@accounts/controllers/userControllers/UpdateUserAvatarController'
 import uploadConfig from '@config/UploadConfig'
 
 const usersRoutes = Router()
 const uploadAvatar = multer(uploadConfig.options('avatar'))
 
-const createUserController = new CreateUserController()
-const authenticateUserController = new AuthenticateUserController()
-const updateUserAvatarController = new UpdateUserAvatarController()
-const authenticationHandler = new AuthenticationHandler()
-
-usersRoutes.route('/users')
+usersRoutes.route('/')
   .post(createUserController.handle)
 
-usersRoutes.route('/users/authenticate')
+usersRoutes.route('/authenticate')
   .post(authenticateUserController.handle)
 
-usersRoutes.route('/users/avatar')
+usersRoutes.route('/avatar')
   .patch(
-    authenticationHandler.handle,
+    authenticationHandler.exec,
     uploadAvatar.single('avatar'),
     updateUserAvatarController.handle
   )

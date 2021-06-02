@@ -1,17 +1,16 @@
 import { getRepository, Repository } from 'typeorm'
 
-import ICategory from '@cars/entities/ICategory'
-import Category from '@cars/infra/typeorm/entities/Category'
+import CategoryTypeOrm from '@cars/infra/typeorm/entities/CategoryTypeOrm'
 import ICategoryRepository from '@cars/repositories/interfaces/ICategoryRepository'
 import CreateCategory from '@myTypes/CreateCategory'
 
 class CategoryRepository implements ICategoryRepository
 {
-  private repository: Repository<ICategory>
+  private repository: Repository<CategoryTypeOrm>
 
   constructor()
   {
-    this.repository = getRepository(Category)
+    this.repository = getRepository(CategoryTypeOrm)
   }
 
   public async create({ name, description }: CreateCategory): Promise<void>
@@ -20,15 +19,21 @@ class CategoryRepository implements ICategoryRepository
     await this.repository.save(category)
   }
 
-  public async list(): Promise<ICategory[]>
+  public async list(): Promise<CategoryTypeOrm[]>
   {
     const categories = await this.repository.find()
     return categories
   }
 
-  public async findByName(name: string): Promise<ICategory>
+  public async findByName(name: string): Promise<CategoryTypeOrm>
   {
     const category = await this.repository.findOne({ name })
+    return category
+  }
+
+  public async findById(id: string): Promise<CategoryTypeOrm>
+  {
+    const category = await this.repository.findOne(id)
     return category
   }
 }

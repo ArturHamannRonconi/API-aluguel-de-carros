@@ -1,9 +1,9 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm'
 
-import ISpecification from '@cars/entities/ISpecification'
+import ISpecification from '@cars/entities/interfaces/ISpecification'
 
 @Entity('specifications')
-class Specification implements ISpecification
+class SpecificationTypeOrm implements ISpecification
 {
   @PrimaryColumn()
   id: string
@@ -18,7 +18,7 @@ class Specification implements ISpecification
   created_at: Date
 }
 
-export default Specification
+export default SpecificationTypeOrm
 
 
 

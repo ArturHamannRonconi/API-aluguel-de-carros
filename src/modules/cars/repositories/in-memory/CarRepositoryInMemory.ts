@@ -1,13 +1,13 @@
 import { v4 as genereateUuid } from 'uuid'
 
 import CreateCar from '@myTypes/CreateCar'
-import ICarRepository from '../interfaces/ICarRepository'
-import ICar from '@cars/entities/ICar'
-import Car from '@cars/infra/typeorm/entities/Car'
+import ICarRepository from '@cars/repositories/interfaces/ICarRepository'
+import ICar from '@cars/entities/interfaces/ICar'
+import Car from '@cars/entities/implementations/Car'
 
 class CarRepositoryInMemory implements ICarRepository
 {
-  repository: ICar[]
+  private repository: ICar[]
 
   constructor()
   {

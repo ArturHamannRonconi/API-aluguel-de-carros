@@ -15,4 +15,4 @@ class CreateSpecificationController
   }
 }
 
-export default CreateSpecificationController
+export default new CreateSpecificationController()

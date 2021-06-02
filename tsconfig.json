@@ -16,7 +16,8 @@
       "@config/*": ["config/*"], 
       "@utils/*": ["utils/*"],
       "@shared/*": ["shared/*"],
-      "@myTypes/*": ["@types/myTypes/*"]
+      "@myTypes/*": ["@types/myTypes/*"],
+      "@docs/*": ["docs/*"]
     }
   }
 }

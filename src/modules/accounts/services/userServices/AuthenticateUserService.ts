@@ -1,4 +1,3 @@
-import 'reflect-metadata'
 import { compare } from 'bcrypt'
 import { inject, injectable } from 'tsyringe'
 import { SignOptions, Secret, sign } from 'jsonwebtoken'
@@ -28,7 +27,6 @@ class AuthenticateUserService
     const payload: Payload = {  }
     const privateKey: Secret = '7a08a0940a9343e60c812a9a70ea65cb'
     const options: SignOptions = { subject: user.id, expiresIn: '1d' }
-
 
     return { token: sign(payload, privateKey, options) }
   }

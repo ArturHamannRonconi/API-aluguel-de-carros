@@ -15,4 +15,4 @@ class ImportCategoryController
   }
 }
 
-export default ImportCategoryController
+export default new ImportCategoryController()

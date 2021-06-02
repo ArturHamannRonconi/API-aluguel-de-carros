@@ -14,4 +14,4 @@ class ListSpecificationController
   }
 }
 
-export default ListSpecificationController
+export default new ListSpecificationController()

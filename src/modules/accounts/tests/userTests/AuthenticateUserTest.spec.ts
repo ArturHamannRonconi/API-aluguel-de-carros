@@ -39,22 +39,20 @@ describe('Authenticate User', () => {
   it('Should not be able authenticate when email is incorrect', async () => {
     const incorrectEmail = user.email.split('').reverse().join('')
     
-    await expect(async () => {
-      await authenticateUserService.execute({
-        email: incorrectEmail,
-        username: user.username,
-        password: user.password
-      })
-    }).rejects
+    await expect(() => authenticateUserService.execute({
+      email: incorrectEmail,
+      username: user.username,
+      password: user.password
+    }))
+      .rejects
       .toThrow('Email, username or password incorrect')
     
-    await expect(async () => {
-      await authenticateUserService.execute({
-        email: incorrectEmail,
-        username: user.username,
-        password: user.password
-      })
-    }).rejects
+    await expect(() => authenticateUserService.execute({
+      email: incorrectEmail,
+      username: user.username,
+      password: user.password
+    }))
+      .rejects
       .toBeInstanceOf(AppError)
 
   })
@@ -62,44 +60,40 @@ describe('Authenticate User', () => {
   it('Should not be able authenticate when username is incorrect', async () => {
     const incorrectUsername = user.username.split('').reverse().join('')
 
-    await expect(async () => {
-      await authenticateUserService.execute({
-        email: user.email,
-        username: incorrectUsername,
-        password: user.password
-      })
-    }).rejects
+    await expect(() => authenticateUserService.execute({
+      email: user.email,
+      username: incorrectUsername,
+      password: user.password
+    }))
+      .rejects
       .toThrow('Email, username or password incorrect')
     
-    await expect(async () => {
-      await authenticateUserService.execute({
-        email: user.email,
-        username: incorrectUsername,
-        password: user.password
-      })
-    }).rejects
+    await expect(() => authenticateUserService.execute({
+      email: user.email,
+      username: incorrectUsername,
+      password: user.password
+    }))
+      .rejects
       .toBeInstanceOf(AppError)
   })
 
   it('Should not be able authenticate when password is incorrect', async () => {
     const incorrectPassword = user.password.split('').reverse().join('') 
 
-    await expect(async () => {
-      await authenticateUserService.execute({
-        email: user.email,
-        username: user.username,
-        password: incorrectPassword
-      })
-    }).rejects
+    await expect(() => authenticateUserService.execute({
+      email: user.email,
+      username: user.username,
+      password: incorrectPassword
+    }))
+      .rejects
       .toThrow('Email, username or password incorrect')
     
-    await expect(async () => {
-      await authenticateUserService.execute({
-        email: user.email,
-        username: user.username,
-        password: incorrectPassword
-      })
-    }).rejects
+    await expect(() => authenticateUserService.execute({
+      email: user.email,
+      username: user.username,
+      password: incorrectPassword
+    }))
+      .rejects
       .toBeInstanceOf(AppError)
   })
 })

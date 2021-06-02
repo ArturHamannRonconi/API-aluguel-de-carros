@@ -1,6 +1,6 @@
 import AppError from '@shared/errors/AppError'
 import ICategoryRepository from '@cars/repositories/interfaces/ICategoryRepository'
-import Category from '@cars/infra/typeorm/entities/Category'
+import Category from '@cars/entities/implementations/Category'
 import CategoryRepositoryInMemory from '@cars/repositories/in-memory/CategoryRepositoryInMemory'
 import CreateCategoryService from '@cars/services/categoryServices/CreateCategoryService'
 
@@ -31,11 +31,11 @@ describe('Create Category', () => {
   it('Should not be able to create a new category with a name exists', async () => {
     await createCategoryService.execute({ name, description })
     
-    await expect(async () => await createCategoryService.execute({ name, description }))
+    await expect(() => createCategoryService.execute({ name, description }))
       .rejects
       .toThrow('Category already exists')
       
-    await expect(async () => await createCategoryService.execute({ name, description }))
+    await expect(() => createCategoryService.execute({ name, description }))
       .rejects
       .toBeInstanceOf(AppError)
   })

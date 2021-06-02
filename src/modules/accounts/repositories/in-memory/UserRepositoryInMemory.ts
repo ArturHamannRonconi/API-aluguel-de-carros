@@ -3,9 +3,9 @@ import { v4 as generateUUID } from 'uuid'
 import CreateUser from '@myTypes/CreateUser'
 import UserAccount from '@myTypes/UserAccount'
 import UserUpdate from '@myTypes/UserUpdate'
-import IUser from '@accounts/entities/IUser'
-import IUserRepository from '../interfaces/IUserRepository'
-import User from '@accounts/infra/typeorm/entities/User'
+import IUser from '@accounts/entities/interfaces/IUser'
+import IUserRepository from '@accounts/repositories/interfaces/IUserRepository'
+import User from '@accounts/entities/implementations/User'
 
 class UserRepositoryInMemory implements IUserRepository
 {

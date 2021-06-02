@@ -1,9 +1,9 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm'
 
-import IUser from '@accounts/entities/IUser'
+import IUser from '@accounts/entities/interfaces/IUser'
 
 @Entity('users')
-class User implements IUser
+class UserTypeOrm implements IUser
 {
   @PrimaryColumn() 
   id: string
@@ -33,4 +33,4 @@ class User implements IUser
   created_at: Date
 }
 
-export default User
+export default UserTypeOrm

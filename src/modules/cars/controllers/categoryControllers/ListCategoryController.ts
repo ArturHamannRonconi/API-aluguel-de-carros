@@ -13,4 +13,4 @@ class ListCategoryController
   }
 }
 
-export default ListCategoryController
+export default new ListCategoryController()

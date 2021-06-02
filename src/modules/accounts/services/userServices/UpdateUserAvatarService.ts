@@ -1,4 +1,3 @@
-import 'reflect-metadata'
 import { inject, injectable } from 'tsyringe'
 
 import IUserRepository from '@accounts/repositories/interfaces/IUserRepository'

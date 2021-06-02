@@ -1,7 +1,6 @@
-import 'reflect-metadata'
 import { inject, injectable } from 'tsyringe'
 
-import Category from '@cars/infra/typeorm/entities/Category'
+import ICategory from '@cars/entities/interfaces/ICategory'
 import ICategoryRepository from '@cars/repositories/interfaces/ICategoryRepository'
 
 @injectable()
@@ -12,7 +11,7 @@ class ListCategoryService
     private categoryRepository: ICategoryRepository
   ) {  }
 
-  public async execute(): Promise<Category[]>
+  public async execute(): Promise<ICategory[]>
   {
     return await this.categoryRepository.list()
   }

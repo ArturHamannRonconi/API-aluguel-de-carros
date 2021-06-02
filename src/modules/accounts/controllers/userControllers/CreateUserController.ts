@@ -17,4 +17,4 @@ class CreateUserController
   }
 }
 
-export default CreateUserController
+export default new CreateUserController()

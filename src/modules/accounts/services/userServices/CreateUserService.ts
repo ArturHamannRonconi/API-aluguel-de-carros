@@ -1,4 +1,3 @@
-import 'reflect-metadata'
 import { hash, genSalt } from 'bcrypt'
 import { inject, injectable } from 'tsyringe'
 

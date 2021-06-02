@@ -1,4 +1,3 @@
-import 'reflect-metadata'
 import { inject, injectable } from 'tsyringe'
 
 import ISpecificationRepository from '@cars/repositories/interfaces/ISpecificationRepository'

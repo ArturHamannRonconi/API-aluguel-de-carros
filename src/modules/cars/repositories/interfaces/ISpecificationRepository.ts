@@ -1,4 +1,4 @@
-import ISpecification from '@cars/entities/ISpecification'
+import ISpecification from '@cars/entities/interfaces/ISpecification'
 import CreateSpecification from '@myTypes/CreateSpecification'
 
 interface ISpecificationRepository

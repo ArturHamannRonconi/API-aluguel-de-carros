@@ -11,6 +11,7 @@ interface ICar
   fine_amount: number
   brand: string
   category_id: string
+  category: ICategory
   created_at: Date
 }
 

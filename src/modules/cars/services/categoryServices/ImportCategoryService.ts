@@ -1,5 +1,4 @@
 import fs from 'fs'
-import 'reflect-metadata'
 import csvParse from 'csv-parse'
 import { inject, injectable } from 'tsyringe'
 
