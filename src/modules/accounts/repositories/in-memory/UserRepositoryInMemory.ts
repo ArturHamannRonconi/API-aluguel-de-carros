@@ -13,7 +13,30 @@ class UserRepositoryInMemory implements IUserRepository
 
   constructor()
   {
-    this.repository = []
+    this.repository = [
+      {
+        id: '32c4102c-acfe-458b-a508-cbb44f462679',
+        name: 'User Test',
+        email: 'user@test.com',
+        username: 'userTest',
+        password: '$2b$10$FjHLFbNbe2SdI4u.IX2xsuJCHlMzb97MqGcdxJtkDNS6zZ6fc0R4.',
+        is_admin: false,
+        driver_license: '000123',
+        avatar: '',
+        created_at: new Date
+      },
+      {
+        id: '19f0b083-2a8e-4791-8d0a-cb0d70cffc3d',
+        name: 'Admin Test',
+        email: 'admin@test.com',
+        username: 'adminTest',
+        password: '$2b$10$LwFS0RMeVcAy6HkURqkyq..TztoyC7oTYv5uO/7GjuqHLE.7VniDa',
+        is_admin: true,
+        driver_license: '123000',
+        avatar: '',
+        created_at: new Date
+      }
+    ]
   }
 
   public async create(userData: CreateUser): Promise<void>

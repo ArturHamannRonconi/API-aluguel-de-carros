@@ -14,7 +14,6 @@ class FindCategoryService
 
   public async execute(id: string): Promise<ICategory>
   {
-    
     const category = await this.categoryRepository.findById(id)
     
     if(!category) throw new AppError('Category not found', 404)

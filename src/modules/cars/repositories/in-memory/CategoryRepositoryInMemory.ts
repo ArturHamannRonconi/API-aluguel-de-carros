@@ -23,12 +23,6 @@ class CategoryRepositoryInMemory implements ICategoryRepository
         name: 'Sedan',
         description: 'Automovel de 3 volumes',
         created_at: new Date
-      },
-      {
-        id: '1d3066d6-ce69-4bc1-9282-7a417e9b0d8b',
-        name: 'Hatch',
-        description: 'Carro curto',
-        created_at: new Date
       }
     ]
   }
