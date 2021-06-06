@@ -9,5 +9,7 @@
   "migrations": ["./src/shared/infra/database/typeorm/migrations/*.ts"],
   "cli": {
     "migrationsDir": "./src/shared/infra/database/typeorm/migrations/"
-  }
+  },
+  "migrationsRun": true,
+  "uuidExtension": "pgcrypto"
 }

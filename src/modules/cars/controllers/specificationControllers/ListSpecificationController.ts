@@ -10,7 +10,8 @@ class ListSpecificationController
     const listSpecificationService = container.resolve(ListSpecificationService)
       
     const specifications = await listSpecificationService.execute()
-    return response.status(200).json(specifications)    
+
+    return response.json(specifications)    
   }
 }
 

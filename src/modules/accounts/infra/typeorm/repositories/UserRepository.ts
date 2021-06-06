@@ -26,34 +26,29 @@ class UserRepository implements IUserRepository
     await this.repository.update(user_id, add_info)
   }
 
-  public async list(): Promise<UserTypeOrm[]>
+  public async findAll(): Promise<UserTypeOrm[]>
   {
-    const users = await this.repository.find()
-    return users
+    return await this.repository.find()
   }
   
   public async verifyEmailAndUsernameExists({ email, username }: Omit<UserAccount, 'password'>): Promise<UserTypeOrm>
   {
-    const user = await this.repository.findOne({ email, username })
-    return user
+    return await this.repository.findOne({ email, username })
   }
 
   public async findByEmail(email: string): Promise<UserTypeOrm>
   {
-    const user = await this.repository.findOne({ email })
-    return user
+    return await this.repository.findOne({ email })
   }
 
   public async findByUsername(username: string): Promise<UserTypeOrm>
   {
-    const user = await this.repository.findOne({ username })
-    return user
+    return await this.repository.findOne({ username })
   }
 
   public async findById(id: string): Promise<UserTypeOrm>
   {
-    const user = await this.repository.findOne(id)
-    return user
+    return await this.repository.findOne(id)
   }
 }
 

@@ -4,8 +4,9 @@ import CreateSpecification from '@myTypes/CreateSpecification'
 interface ISpecificationRepository
 {
   create({ name, description }: CreateSpecification): Promise<void>
-  list(): Promise<ISpecification[]>
+  findAll(): Promise<ISpecification[]>
   findByName(name: string): Promise<ISpecification>
+  findByIds(specifications: string[]): Promise<ISpecification[]>
 }
 
 export default ISpecificationRepository

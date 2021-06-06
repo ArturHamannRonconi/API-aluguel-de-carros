@@ -13,7 +13,8 @@ class CreateCarController
       license_plate,
       fine_amount,
       brand,
-      category_id
+      category_id,
+      specifications_id
     } = request.body
 
     const createCarService = container.resolve(CreateCarService)
@@ -24,7 +25,8 @@ class CreateCarController
       license_plate,
       fine_amount,
       brand,
-      category_id
+      category_id,
+      specifications_id
     })
 
     return response.status(201).end()

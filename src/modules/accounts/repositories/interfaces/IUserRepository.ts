@@ -7,7 +7,7 @@ interface IUserRepository
 {
   create(userData: CreateUser): Promise<void>
   update({ user_id, add_info }: UserUpdate): Promise<void>
-  list(): Promise<IUser[]>
+  findAll(): Promise<IUser[]>
   findById(id: string): Promise<IUser>
   findByEmail(email: string): Promise<IUser>
   findByUsername(username: string): Promise<IUser>

@@ -6,7 +6,7 @@ interface ICategory
   name: string
   description: string
   created_at: Date
-  cars?: ICar[] 
+  cars: ICar[] 
 }
 
 export default ICategory

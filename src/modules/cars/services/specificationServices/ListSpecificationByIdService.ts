@@ -4,17 +4,17 @@ import SpecificationTypeOrm from '@cars/infra/typeorm/entities/SpecificationType
 import ISpecificationRepository from '@cars/repositories/interfaces/ISpecificationRepository'
 
 @injectable()
-class ListSpecificationService
+class ListSpecificationByIdService
 {
   constructor(
     @inject('SpecificationRepository')
     private specificationRepository: ISpecificationRepository
   ) {  }
 
-  public async execute(): Promise<SpecificationTypeOrm[]>
+  public async execute(specifications_id: string[]): Promise<SpecificationTypeOrm[]>
   {
-    return await this.specificationRepository.findAll()
+    return this.specificationRepository.findByIds(specifications_id)
   }
 }
 
-export default ListSpecificationService
+export default ListSpecificationByIdService

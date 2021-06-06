@@ -1,6 +1,8 @@
-import ICategory from '@cars/entities/interfaces/ICategory'
+import ICar from '../interfaces/ICar'
+import Category from './Category'
+import Specification from './Specification'
 
-class Car 
+class Car implements ICar
 {
   id: string
   name: string
@@ -11,7 +13,8 @@ class Car
   fine_amount: number
   brand: string
   category_id: string
-  category: ICategory
+  category: Category
+  specifications: Specification[]
   created_at: Date
 }
 

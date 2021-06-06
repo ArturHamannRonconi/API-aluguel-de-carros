@@ -1,11 +1,14 @@
+import { container } from 'tsyringe'
+
 import AppError from '@shared/errors/AppError'
 import CreateCar from '@myTypes/CreateCar'
 import ICarRepository from '@cars/repositories/interfaces/ICarRepository'
 import CarRepositoryInMemory from '@cars/repositories/in-memory/CarRepositoryInMemory'
 import CreateCarService from '@cars/services/carServices/CreateCarService'
-import { container } from 'tsyringe'
 import ICategoryRepository from '@cars/repositories/interfaces/ICategoryRepository'
 import CategoryRepositoryInMemory from '@cars/repositories/in-memory/CategoryRepositoryInMemory'
+import ISpecificationRepository from '@cars/repositories/interfaces/ISpecificationRepository'
+import SpecificationsRepositoryInMemory from '@cars/repositories/in-memory/SpecificationRepositoryInMemory'
 
 describe('Create Car', () => {
   let carRepository: ICarRepository
@@ -25,6 +28,10 @@ describe('Create Car', () => {
     container.registerSingleton<ICategoryRepository>(
       'CategoryRepository',
       CategoryRepositoryInMemory
+    )
+    container.registerSingleton<ISpecificationRepository>(
+      'SpecificationRepository',
+      SpecificationsRepositoryInMemory
     )
     carRepository =  new CarRepositoryInMemory()
     createCarService = new CreateCarService(carRepository)

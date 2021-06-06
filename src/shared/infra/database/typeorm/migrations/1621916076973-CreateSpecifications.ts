@@ -8,7 +8,7 @@ export class CreateSpecifications1621916076973 implements MigrationInterface
       new Table({
         name: 'specifications',
         columns: [
-          { name: 'id', type: 'uuid', isPrimary: true, default: 'gen_random_uuid()' },
+          { name: 'id', type: 'uuid', isPrimary: true, generationStrategy: 'uuid', isGenerated: true },
           { name: 'name', type: 'varchar', isNullable: false },
           { name: 'description', type: 'varchar', isNullable: false },
           { name: 'created_at', type: 'timestamp', default: 'now()' }
@@ -19,7 +19,7 @@ export class CreateSpecifications1621916076973 implements MigrationInterface
 
   public async down(queryRunner: QueryRunner): Promise<void>
   {
-    await queryRunner.clearTable('specifications')
+    await queryRunner.dropTable('specifications_cars')
     await queryRunner.dropTable('specifications')
   }
 }

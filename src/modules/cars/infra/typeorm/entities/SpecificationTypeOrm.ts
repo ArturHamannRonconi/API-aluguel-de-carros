@@ -1,6 +1,7 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryColumn } from 'typeorm'
 
 import ISpecification from '@cars/entities/interfaces/ISpecification'
+import CarTypeOrm from './CarTypeOrm'
 
 @Entity('specifications')
 class SpecificationTypeOrm implements ISpecification
@@ -13,6 +14,14 @@ class SpecificationTypeOrm implements ISpecification
 
   @Column()
   description: string
+
+  @ManyToMany(() => CarTypeOrm)
+  @JoinTable({
+    name: 'specifications_cars',
+    joinColumns: [{ name: 'specification_id' }],
+    inverseJoinColumns: [{ name: 'car_id' }]
+  })
+  cars: CarTypeOrm[]
 
   @CreateDateColumn()
   created_at: Date

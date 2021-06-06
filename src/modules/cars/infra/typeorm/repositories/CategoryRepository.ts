@@ -19,22 +19,19 @@ class CategoryRepository implements ICategoryRepository
     await this.repository.save(category)
   }
 
-  public async list(): Promise<CategoryTypeOrm[]>
+  public async findAll(): Promise<CategoryTypeOrm[]>
   {
-    const categories = await this.repository.find()
-    return categories
+    return await this.repository.find()
   }
 
   public async findByName(name: string): Promise<CategoryTypeOrm>
   {
-    const category = await this.repository.findOne({ name })
-    return category
+    return await this.repository.findOne({ name })
   }
 
   public async findById(id: string): Promise<CategoryTypeOrm>
   {
-    const category = await this.repository.findOne(id)
-    return category
+    return await this.repository.findOne(id)
   }
 }
 

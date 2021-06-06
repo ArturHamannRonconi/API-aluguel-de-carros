@@ -12,7 +12,6 @@ async function create()
   await getConnection(connection.name)
     .query(
       `INSERT INTO users (
-        id,
         name,
         email,
         avatar,
@@ -23,7 +22,6 @@ async function create()
         driver_license
       )
       VALUES (
-        gen_random_uuid(),
         'Admin',
         'admin@mail.com',
         NULL,

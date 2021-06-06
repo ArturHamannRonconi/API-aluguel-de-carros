@@ -1,7 +1,8 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryColumn } from 'typeorm'
 
 import ICar from '@cars/entities/interfaces/ICar'
 import CategoryTypeOrm from './CategoryTypeOrm'
+import SpecificationTypeOrm from './SpecificationTypeOrm'
 
 @Entity('cars')
 class CarTypeOrm implements ICar
@@ -33,9 +34,17 @@ class CarTypeOrm implements ICar
   @Column()  
   category_id: string
   
-  @ManyToOne(() => CategoryTypeOrm, category => category.cars)
+  @ManyToOne(() => CategoryTypeOrm)
   @JoinColumn({ name: 'category_id' })
   category: CategoryTypeOrm
+
+  @ManyToMany(() => SpecificationTypeOrm)
+  @JoinTable({
+    name: 'specifications_cars',
+    joinColumns: [{ name: 'car_id' }],
+    inverseJoinColumns: [{ name: 'specification_id' }]
+  })
+  specifications: SpecificationTypeOrm[]
 
   @CreateDateColumn()
   created_at: Date

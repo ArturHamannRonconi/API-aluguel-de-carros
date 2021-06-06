@@ -13,7 +13,7 @@ class ListCategoryService
 
   public async execute(): Promise<ICategory[]>
   {
-    return await this.categoryRepository.list()
+    return await this.categoryRepository.findAll()
   }
 }
 

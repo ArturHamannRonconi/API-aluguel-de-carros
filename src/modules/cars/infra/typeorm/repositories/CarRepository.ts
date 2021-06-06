@@ -2,6 +2,9 @@ import ICarRepository from '@cars/repositories/interfaces/ICarRepository'
 import CreateCar from '@myTypes/CreateCar'
 import { getRepository, Repository } from 'typeorm'
 import CarTypeOrm from '@cars/infra/typeorm/entities/CarTypeOrm'
+import ICar from '@cars/entities/interfaces/ICar'
+import ListCarByNameCategoryAndBrand from '@myTypes/ListCarByNameCategoryAndBrand'
+import UpdateCar from '@myTypes/UpdateCar'
 
 class CarRepository implements ICarRepository
 {
@@ -12,22 +15,37 @@ class CarRepository implements ICarRepository
     this.repository = getRepository(CarTypeOrm)
   }
 
+  public async update(id: string, updateCar: UpdateCar): Promise<void>
+  {
+    const car = await this.repository.update(id, updateCar)
+    console.log(car)
+  }
+
+  public async findById(id: string): Promise<ICar>
+  {
+    return this.repository.findOne(id)
+  }
+
   public async create(createCarAttributes: CreateCar): Promise<void>
   {
     const car = this.repository.create(createCarAttributes)
     await this.repository.save(car)
   }
 
-  public async list(): Promise<CarTypeOrm[]>
+  public async findAll(): Promise<CarTypeOrm[]>
   {
-    const cars = this.repository.find()
-    return cars
+    return await this.repository.find()
   }
 
   public async findByLicensePlate(license_plate: string): Promise<CarTypeOrm>
   {
-    const car = this.repository.findOne({ license_plate })
-    return car
+    return await this.repository.findOne({ license_plate })
+  }
+
+  public async findAvailable(listBy: ListCarByNameCategoryAndBrand = {}): Promise<ICar[]>
+  {
+    const where = { available: true, ...listBy }
+    return this.repository.find({ where })
   }
 }
 

@@ -13,7 +13,7 @@ class AuthenticateUserController
 
     const token = await authenticateUserService.execute({ email, username, password })
 
-    return response.status(200).json(token) 
+    return response.json(token) 
   }
 
 }

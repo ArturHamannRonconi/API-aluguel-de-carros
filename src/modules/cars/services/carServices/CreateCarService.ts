@@ -4,6 +4,7 @@ import ICarRepository from '@cars/repositories/interfaces/ICarRepository'
 import CreateCar from '@myTypes/CreateCar'
 import AppError from '@shared/errors/AppError'
 import FindCategoryService from '@cars/services/categoryServices/FindCategoryService'
+import ListSpecificationByIdService from '../specificationServices/ListSpecificationByIdService'
 
 @injectable()
 class CreateCarService
@@ -24,7 +25,14 @@ class CreateCarService
     if(carAlreadyExists)
       throw new AppError('Car already exists')
 
-    await this.carRepository.create(carAttributes)
+    const listSpecificationByIdService = container.resolve(ListSpecificationByIdService)
+    const specifications = await listSpecificationByIdService
+      .execute(carAttributes?.specifications_id ?? [])
+    
+    carAttributes.specifications_id = undefined
+    const car = Object.assign(carAttributes, { specifications })
+
+    await this.carRepository.create(car)
   }
 }
 

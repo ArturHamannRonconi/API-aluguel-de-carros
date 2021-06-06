@@ -8,7 +8,7 @@ export class CreateCars1622460485876 implements MigrationInterface
       new Table({
         name: 'cars',
         columns: [
-          { name: 'id', type: 'uuid', isPrimary: true, default: 'gen_random_uuid()' },
+          { name: 'id', type: 'uuid', isPrimary: true, generationStrategy: 'uuid', isGenerated: true },
           { name: 'name', type: 'varchar' },
           { name: 'description', type: 'varchar' },
           { name: 'daily_rate', type: 'numeric' },
@@ -35,6 +35,7 @@ export class CreateCars1622460485876 implements MigrationInterface
     
   public async down(queryRunner: QueryRunner): Promise<void>
   {
+    await queryRunner.dropTable('specifications_cars')
     await queryRunner.dropTable('cars')
   }
 }

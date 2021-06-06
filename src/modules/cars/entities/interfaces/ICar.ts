@@ -1,3 +1,4 @@
+import Specification from '../implementations/Specification'
 import ICategory from './ICategory'
 
 interface ICar 
@@ -11,7 +12,8 @@ interface ICar
   fine_amount: number
   brand: string
   category_id: string
-  category?: ICategory
+  category: ICategory
+  specifications: Specification[]
   created_at: Date
 }
 

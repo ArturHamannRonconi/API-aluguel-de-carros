@@ -21,7 +21,6 @@
 - DEVE ser possível listar todos os carros DISPONÍVEIS pelo nome da CATEGORIA. 
 - DEVE ser possível listar todos os carros DISPONÍVEIS pelo nome da MARCA. 
 - DEVE ser possível listar todos os carros DISPONÍVEIS pelo nome do CARRO. 
-- DEVE ser possível listar todas as categorias REFERENTES ao carro.
 
 **RN**
 - O usuário NÃO PRECISA estar cadastrado no sistema.

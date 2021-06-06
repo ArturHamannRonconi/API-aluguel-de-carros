@@ -1,4 +1,6 @@
-class User
+import IUser from '../interfaces/IUser'
+
+class User implements IUser
 {
   id: string
   name: string

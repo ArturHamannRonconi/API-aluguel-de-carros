@@ -8,7 +8,7 @@ export class CreateCategories1621890655557 implements MigrationInterface
       new Table({
         name: 'categories',
         columns: [
-          { name: 'id', type: 'uuid', isPrimary: true, default: 'gen_random_uuid()' },
+          { name: 'id', type: 'uuid', isPrimary: true, generationStrategy: 'uuid', isGenerated: true },
           { name: 'name', type: 'varchar', isNullable: false },
           { name: 'description', type: 'varchar', isNullable: false },
           { name: 'created_at', type: 'timestamp', default: 'now()' }
@@ -19,7 +19,6 @@ export class CreateCategories1621890655557 implements MigrationInterface
 
   public async down(queryRunner: QueryRunner): Promise<void>
   {
-    await queryRunner.clearTable('categories')
     await queryRunner.dropTable('categories')
   }
 }

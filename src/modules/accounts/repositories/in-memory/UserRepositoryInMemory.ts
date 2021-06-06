@@ -3,18 +3,17 @@ import { v4 as generateUUID } from 'uuid'
 import CreateUser from '@myTypes/CreateUser'
 import UserAccount from '@myTypes/UserAccount'
 import UserUpdate from '@myTypes/UserUpdate'
-import IUser from '@accounts/entities/interfaces/IUser'
 import IUserRepository from '@accounts/repositories/interfaces/IUserRepository'
 import User from '@accounts/entities/implementations/User'
 
 class UserRepositoryInMemory implements IUserRepository
 {
-  private repository: IUser[]
+  private repository: User[]
 
   constructor()
   {
     this.repository = [
-      {
+      Object.assign(new User(), {
         id: '32c4102c-acfe-458b-a508-cbb44f462679',
         name: 'User Test',
         email: 'user@test.com',
@@ -24,8 +23,8 @@ class UserRepositoryInMemory implements IUserRepository
         driver_license: '000123',
         avatar: '',
         created_at: new Date
-      },
-      {
+      }),
+      Object.assign(new User(), {
         id: '19f0b083-2a8e-4791-8d0a-cb0d70cffc3d',
         name: 'Admin Test',
         email: 'admin@test.com',
@@ -35,7 +34,7 @@ class UserRepositoryInMemory implements IUserRepository
         driver_license: '123000',
         avatar: '',
         created_at: new Date
-      }
+      })
     ]
   }
 
@@ -60,27 +59,27 @@ class UserRepositoryInMemory implements IUserRepository
     Object.assign(user, add_info)
   }
   
-  public async list(): Promise<IUser[]>
+  public async findAll(): Promise<User[]>
   {
     return this.repository
   }
   
-  public async findById(id: string): Promise<IUser>
+  public async findById(id: string): Promise<User>
   {
     return this.repository.find(user => user.id === id)
   }
   
-  public async findByEmail(email: string): Promise<IUser>
+  public async findByEmail(email: string): Promise<User>
   {
     return this.repository.find(user => user.email === email)
   }
   
-  public async findByUsername(username: string): Promise<IUser>
+  public async findByUsername(username: string): Promise<User>
   {
     return this.repository.find(user => user.username === username)
   }
   
-  public async verifyEmailAndUsernameExists({ email, username }: Omit<UserAccount, 'password'>): Promise<IUser>
+  public async verifyEmailAndUsernameExists({ email, username }: Omit<UserAccount, 'password'>): Promise<User>
   {
     return this.repository.find(user => user.username === username && user.email === email)
   }

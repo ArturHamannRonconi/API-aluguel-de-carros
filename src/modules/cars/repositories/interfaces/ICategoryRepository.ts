@@ -4,7 +4,7 @@ import CreateCategory from '@myTypes/CreateCategory'
 interface ICategoryRepository
 {
   create({ name, description }: CreateCategory): Promise<void>
-  list(): Promise<ICategory[]>
+  findAll(): Promise<ICategory[]>
   findByName(name: string): Promise<ICategory>
   findById(id: string): Promise<ICategory>
 }
