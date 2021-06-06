@@ -18,8 +18,8 @@ class SpecificationTypeOrm implements ISpecification
   @ManyToMany(() => CarTypeOrm)
   @JoinTable({
     name: 'specifications_cars',
-    joinColumns: [{ name: 'specification_id' }],
-    inverseJoinColumns: [{ name: 'car_id' }]
+    joinColumn: { name: 'specification_id' },
+    inverseJoinColumn: { name: 'car_id' }
   })
   cars: CarTypeOrm[]
 

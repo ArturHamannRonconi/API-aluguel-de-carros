@@ -41,8 +41,8 @@ class CarTypeOrm implements ICar
   @ManyToMany(() => SpecificationTypeOrm)
   @JoinTable({
     name: 'specifications_cars',
-    joinColumns: [{ name: 'car_id' }],
-    inverseJoinColumns: [{ name: 'specification_id' }]
+    joinColumn: { name: 'car_id' },
+    inverseJoinColumn: { name: 'specification_id' }
   })
   specifications: SpecificationTypeOrm[]
 

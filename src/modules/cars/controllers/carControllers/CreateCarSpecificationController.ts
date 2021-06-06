@@ -11,9 +11,9 @@ class CreateCarSpecificationController
     const { specifications_id } = request.body
 
     const createCarSpecificationService = container.resolve(CreateCarSpecificationService)
-    await createCarSpecificationService.execute({ car_id, specifications_id })
+    const car = await createCarSpecificationService.execute({ car_id, specifications_id })
 
-    return response.status(201).json({ message: 'ok' })
+    return response.status(201).json(car)
   }
 }
 

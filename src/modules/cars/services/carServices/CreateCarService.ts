@@ -14,24 +14,41 @@ class CreateCarService
     private carRepository: ICarRepository
   ) {  }
 
-  public async execute(carAttributes: CreateCar): Promise<void>
+  public async execute({
+    name,
+    description,
+    daily_rate,
+    license_plate,
+    fine_amount,
+    brand,
+    category_id,
+    specifications_id
+  }: CreateCar): Promise<void>
   {
     const findCategoryService = container.resolve(FindCategoryService)
-    await findCategoryService.execute(carAttributes.category_id)
+    await findCategoryService.execute(category_id)
 
     const carAlreadyExists = await this.carRepository
-      .findByLicensePlate(carAttributes.license_plate)
+      .findByLicensePlate(license_plate)
 
     if(carAlreadyExists)
       throw new AppError('Car already exists')
 
     const listSpecificationByIdService = container.resolve(ListSpecificationByIdService)
     const specifications = await listSpecificationByIdService
-      .execute(carAttributes?.specifications_id ?? [])
+      .execute(specifications_id ?? [])
     
-    carAttributes.specifications_id = undefined
-    const car = Object.assign(carAttributes, { specifications })
-
+    const car = {
+      name,
+      description,
+      daily_rate,
+      license_plate,
+      fine_amount,
+      brand,
+      category_id,
+      specifications
+    }
+    
     await this.carRepository.create(car)
   }
 }

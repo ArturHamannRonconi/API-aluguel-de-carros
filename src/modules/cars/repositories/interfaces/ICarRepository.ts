@@ -6,7 +6,7 @@ import UpdateCar from '@myTypes/UpdateCar'
 interface ICarRepository
 {
   create(createCarAttributes: CreateCar): Promise<void>
-  update(id: string, updateCar: UpdateCar): Promise<void>
+  update(id: string, updateCar: UpdateCar): Promise<ICar>
   findByLicensePlate(license_plate: string): Promise<ICar>
   findAll(): Promise<ICar[]>
   findAvailable(listBy: ListCarByNameCategoryAndBrand): Promise<ICar[]>

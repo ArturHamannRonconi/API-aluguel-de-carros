@@ -1,10 +1,10 @@
 import { container, inject, injectable } from 'tsyringe'
 
 import ICarRepository from '@cars/repositories/interfaces/ICarRepository'
-import ISpecificationRepository from '@cars/repositories/interfaces/ISpecificationRepository'
 import CreateCarSpecification from '@myTypes/CreateCarSpecification'
 import AppError from '@shared/errors/AppError'
 import ListSpecificationByIdService from '../specificationServices/ListSpecificationByIdService'
+import ICar from '@cars/entities/interfaces/ICar'
 
 @injectable()
 class CreateCarSpecificationService
@@ -14,7 +14,7 @@ class CreateCarSpecificationService
     private carRepository: ICarRepository,
   ) {  }
 
-  public async execute({ car_id, specifications_id }: CreateCarSpecification): Promise<void>
+  public async execute({ car_id, specifications_id }: CreateCarSpecification): Promise<ICar>
   {
     const carExists = await this.carRepository.findById(car_id)
     if(!carExists) throw new AppError('Car not found', 404)
@@ -26,7 +26,7 @@ class CreateCarSpecificationService
       .specifications.some(specification =>
         specifications_id.includes(specification.id)
       )
-    
+
     if(specificationAlreadyAdd)
       throw new AppError('Some specification already hitched in the car', 409)
       
@@ -36,7 +36,7 @@ class CreateCarSpecificationService
     if(specifications.length < specifications_id.length)
       throw new AppError('Some specification do not exists', 404)
         
-    await this.carRepository.update(car_id, { specifications })
+    return await this.carRepository.update(car_id, { specifications })
   }
 }
 
