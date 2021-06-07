@@ -1,0 +1,79 @@
+import { inject, injectable } from 'tsyringe'
+
+import IRental from '@rentals/entities/interfaces/IRental'
+import IRentalRepository from '@rentals/repositories/interfaces/IRentalRepository'
+import CreateRental from '@myTypes/CreateRental'
+import AppError from '@shared/errors/AppError'
+import CarAndUserAvailable from '@myTypes/CarAndUserAvailable'
+import RentalDuration from '@myTypes/RentalDuration'
+import FormatedDate from '@myTypes/FormatedDate'
+import dayjsDateProvider from '@shared/container/providers/DateProvider/implementations/DayjsDateProvider'
+
+@injectable()
+class CreateRentalService
+{
+  constructor(
+    @inject('RentalRepository')
+    private rentalRepository: IRentalRepository
+  ) {  }
+
+  public async execute({
+    car_id, user_id,
+    start_date, expect_return_date
+  }: CreateRental): Promise<IRental>
+  {
+    await this.verifyUserAndCarAvailability({ car_id, user_id })
+    this.verifyRentalDuration({ start_date, expect_return_date })
+    
+    const { entrance, deadline } =
+      this.formatDate({ start_date, expect_return_date })
+
+    const rental = await this.rentalRepository.create({
+      car_id, user_id,
+      start_date: entrance,
+      expect_return_date: deadline
+    })
+
+    return rental
+  }
+
+  private async verifyUserAndCarAvailability({ car_id, user_id }: CarAndUserAvailable): Promise<void>
+  {
+    const [ userUnavailable, carUnavailable ] = await Promise.all([
+      this.rentalRepository.userAlreadyReservedCar(user_id),
+      this.rentalRepository.carAlreadyReserved(car_id)
+    ])
+
+    if(userUnavailable) throw new AppError('The user already reserved car', 400)
+    if(carUnavailable) throw new AppError('The car already reserved', 400)
+  }
+
+  private verifyRentalDuration({ expect_return_date, start_date }: RentalDuration): void
+  {
+    const formatDate = 'DD/MM/YYYY HH:mm'
+    const rentIsLessThan24h = dayjsDateProvider
+      .compareDuration({
+        value: 1,
+        unit: 'day',
+        start_date,
+        formatDate,
+        expect_return_date
+      })
+
+    if(rentIsLessThan24h)
+      throw new AppError('Minimum rental is with 24h', 400)
+  }
+
+  private formatDate({ start_date, expect_return_date }: RentalDuration): FormatedDate
+  {
+    const formatDate = 'DD/MM/YYYY HH:mm' 
+
+    return dayjsDateProvider.formatDate({
+      formatDate,
+      start_date,
+      expect_return_date
+    })
+  }
+}
+
+export default CreateRentalService

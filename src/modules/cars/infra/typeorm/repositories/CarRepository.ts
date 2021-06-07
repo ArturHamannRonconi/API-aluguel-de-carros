@@ -1,11 +1,11 @@
+import { getRepository, Repository } from 'typeorm'
+
 import ICarRepository from '@cars/repositories/interfaces/ICarRepository'
 import CreateCar from '@myTypes/CreateCar'
-import { getRepository, Repository } from 'typeorm'
 import CarTypeOrm from '@cars/infra/typeorm/entities/CarTypeOrm'
 import ICar from '@cars/entities/interfaces/ICar'
 import ListCarByNameCategoryAndBrand from '@myTypes/ListCarByNameCategoryAndBrand'
 import UpdateCar from '@myTypes/UpdateCar'
-import SpecificationTypeOrm from '../entities/SpecificationTypeOrm'
 
 class CarRepository implements ICarRepository
 {
@@ -18,8 +18,20 @@ class CarRepository implements ICarRepository
 
   public async update(id: string, updateCar: UpdateCar): Promise<CarTypeOrm>
   {
-    const car = await this.repository.findOne(id)
-    Object.assign(car, updateCar)
+    const car = await this.repository.findOne(id, {
+      relations: ['specifications']
+    })
+
+    Object.assign(car, {
+      fine_amount: updateCar.fine_amount,
+      available: updateCar.available,
+      daily_rate: updateCar.daily_rate,
+      license_plate: updateCar.license_plate
+    })
+
+    updateCar.specifications
+      .forEach(specification => car.specifications.push(specification))
+
     return await this.repository.save(car)
   }
 
@@ -50,7 +62,7 @@ class CarRepository implements ICarRepository
   public async findAvailable(listBy: ListCarByNameCategoryAndBrand = {}): Promise<ICar[]>
   {
     return this.repository.find({
-      relations: ['specifications'],
+      relations: ['specifications', 'category'],
       where: { available: true, ...listBy }
     })
   }

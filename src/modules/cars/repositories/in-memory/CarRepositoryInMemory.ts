@@ -55,14 +55,16 @@ class CarRepositoryInMemory implements ICarRepository
     ]
   }
 
-  public async update(id: string, updateCar: UpdateCar): Promise<void>
+  public async update(id: string, updateCar: UpdateCar): Promise<Car>
   {
     const car = this.repository.find(car => car.id === id)
     const indexCar = this.repository.findIndex(car => car.id === id)
     
     this.repository.splice(indexCar, 1)
     Object.assign(car, updateCar)
+
     this.repository.push(car)
+    return car
   }
 
   public async create(createCarAttributes: CreateCar): Promise<void>

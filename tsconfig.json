@@ -13,6 +13,7 @@
     "paths": {
       "@accounts/*": ["modules/accounts/*"], 
       "@cars/*": ["modules/cars/*"], 
+      "@rentals/*": ["modules/rentals/*"], 
       "@config/*": ["config/*"], 
       "@utils/*": ["utils/*"],
       "@shared/*": ["shared/*"],

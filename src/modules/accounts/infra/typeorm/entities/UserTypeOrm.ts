@@ -1,11 +1,11 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
 import IUser from '@accounts/entities/interfaces/IUser'
 
 @Entity('users')
 class UserTypeOrm implements IUser
 {
-  @PrimaryColumn() 
+  @PrimaryGeneratedColumn('uuid') 
   id: string
 
   @Column()
@@ -25,7 +25,7 @@ class UserTypeOrm implements IUser
 
   @Column()
   is_admin: boolean
-  
+
   @Column()
   avatar: string
 

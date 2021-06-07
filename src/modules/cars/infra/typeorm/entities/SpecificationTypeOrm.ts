@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm'
 
 import ISpecification from '@cars/entities/interfaces/ISpecification'
 import CarTypeOrm from './CarTypeOrm'
@@ -6,7 +6,7 @@ import CarTypeOrm from './CarTypeOrm'
 @Entity('specifications')
 class SpecificationTypeOrm implements ISpecification
 {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string
 
   @Column()

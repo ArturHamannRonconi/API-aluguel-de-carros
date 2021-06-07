@@ -1,6 +1,5 @@
 import AppError from '@shared/errors/AppError'
 import ICategoryRepository from '@cars/repositories/interfaces/ICategoryRepository'
-import Category from '@cars/entities/implementations/Category'
 import CategoryRepositoryInMemory from '@cars/repositories/in-memory/CategoryRepositoryInMemory'
 import CreateCategoryService from '@cars/services/categoryServices/CreateCategoryService'
 

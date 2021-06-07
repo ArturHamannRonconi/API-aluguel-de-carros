@@ -1,4 +1,4 @@
-import { Column, Entity, CreateDateColumn, PrimaryColumn, OneToMany } from 'typeorm'
+import { Column, Entity, CreateDateColumn, PrimaryGeneratedColumn, OneToMany } from 'typeorm'
 
 import ICategory from '@cars/entities/interfaces/ICategory'
 import CarTypeOrm from './CarTypeOrm'
@@ -6,7 +6,7 @@ import CarTypeOrm from './CarTypeOrm'
 @Entity('categories')
 class CategoryTypeOrm implements ICategory
 {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string
   
   @Column()

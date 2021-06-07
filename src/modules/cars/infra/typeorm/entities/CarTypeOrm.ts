@@ -1,13 +1,14 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 
 import ICar from '@cars/entities/interfaces/ICar'
 import CategoryTypeOrm from './CategoryTypeOrm'
 import SpecificationTypeOrm from './SpecificationTypeOrm'
+import CarImageTypeOrm from './CarImageTypeOrm'
 
 @Entity('cars')
 class CarTypeOrm implements ICar
 {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string
   
   @Column()
@@ -33,12 +34,15 @@ class CarTypeOrm implements ICar
   
   @Column()  
   category_id: string
-  
-  @ManyToOne(() => CategoryTypeOrm)
+
+  @ManyToOne(() => CategoryTypeOrm, category => category.cars)
   @JoinColumn({ name: 'category_id' })
   category: CategoryTypeOrm
 
-  @ManyToMany(() => SpecificationTypeOrm)
+  @OneToMany(() => CarImageTypeOrm, image => image.car_id)
+  images: CarImageTypeOrm[]
+
+  @ManyToMany(() => SpecificationTypeOrm, specification => specification.cars)
   @JoinTable({
     name: 'specifications_cars',
     joinColumn: { name: 'car_id' },

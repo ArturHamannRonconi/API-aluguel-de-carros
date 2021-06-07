@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe'
 
-import SpecificationTypeOrm from '@cars/infra/typeorm/entities/SpecificationTypeOrm'
 import ISpecificationRepository from '@cars/repositories/interfaces/ISpecificationRepository'
+import ISpecification from '@cars/entities/interfaces/ISpecification'
 
 @injectable()
 class ListSpecificationByIdService
@@ -11,7 +11,7 @@ class ListSpecificationByIdService
     private specificationRepository: ISpecificationRepository
   ) {  }
 
-  public async execute(specifications_id: string[]): Promise<SpecificationTypeOrm[]>
+  public async execute(specifications_id: string[]): Promise<ISpecification[]>
   {
     return this.specificationRepository.findByIds(specifications_id)
   }

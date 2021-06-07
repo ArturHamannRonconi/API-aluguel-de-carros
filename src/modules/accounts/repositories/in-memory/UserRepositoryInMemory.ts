@@ -34,6 +34,17 @@ class UserRepositoryInMemory implements IUserRepository
         driver_license: '123000',
         avatar: '',
         created_at: new Date
+      }),
+      Object.assign(new User(), {
+        id: '2d2e9d13-bcf8-4d4c-a9f4-8ee848a9b4e4',
+        name: 'User Test 2',
+        email: 'user2@test.com',
+        username: 'userTest2',
+        password: '$2b$10$K0.o2e.wASTM2LXuTUo/oO1nhDA.M67rTcVkvZI9Q25y4wloI/lca',
+        is_admin: false,
+        driver_license: '153210',
+        avatar: '',
+        created_at: new Date
       })
     ]
   }
