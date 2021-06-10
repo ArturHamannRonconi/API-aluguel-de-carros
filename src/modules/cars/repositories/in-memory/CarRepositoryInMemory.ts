@@ -5,6 +5,7 @@ import ICarRepository from '@cars/repositories/interfaces/ICarRepository'
 import Car from '@cars/entities/implementations/Car'
 import ListCarByNameCategoryAndBrand from '@myTypes/ListCarByNameCategoryAndBrand'
 import UpdateCar from '@myTypes/UpdateCar'
+import CarCost from '@myTypes/CarCost'
 
 class CarRepositoryInMemory implements ICarRepository
 {
@@ -53,6 +54,26 @@ class CarRepositoryInMemory implements ICarRepository
         specifications: []
       })
     ]
+  }
+
+  public async getCarCost(car_id: string): Promise<CarCost>
+  {
+    const carCost = this.repository.reduce((acc, car) => {
+      if(car.id === car_id) {
+        acc['daily_rate'] = car.daily_rate
+        acc['fine_amount'] = car.fine_amount
+      }
+
+      return acc
+    }, {}) as CarCost
+
+    return carCost
+  }
+
+  public async updateAvailable(id: string): Promise<void>
+  {
+    const carIndex = this.repository.findIndex(car => car.id === id)
+    this.repository[carIndex].available = !this.repository[carIndex].available 
   }
 
   public async update(id: string, updateCar: UpdateCar): Promise<Car>

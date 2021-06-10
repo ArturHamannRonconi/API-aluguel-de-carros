@@ -8,13 +8,16 @@ import CarAndUserAvailable from '@myTypes/CarAndUserAvailable'
 import RentalDuration from '@myTypes/RentalDuration'
 import FormatedDate from '@myTypes/FormatedDate'
 import dayjsDateProvider from '@shared/container/providers/DateProvider/implementations/DayjsDateProvider'
+import ICarRepository from '@cars/repositories/interfaces/ICarRepository'
 
 @injectable()
 class CreateRentalService
 {
   constructor(
     @inject('RentalRepository')
-    private rentalRepository: IRentalRepository
+    private rentalRepository: IRentalRepository,
+    @inject('CarRepository')
+    private carRepository: ICarRepository
   ) {  }
 
   public async execute({
@@ -22,17 +25,23 @@ class CreateRentalService
     start_date, expect_return_date
   }: CreateRental): Promise<IRental>
   {
+    const carExists = await this.carRepository.findById(car_id)
+    if(!carExists) throw new AppError('Car not found', 404)
+
     await this.verifyUserAndCarAvailability({ car_id, user_id })
     this.verifyRentalDuration({ start_date, expect_return_date })
     
     const { entrance, deadline } =
       this.formatDate({ start_date, expect_return_date })
 
-    const rental = await this.rentalRepository.create({
-      car_id, user_id,
-      start_date: entrance,
-      expect_return_date: deadline
-    })
+    const [ rental ] = await Promise.all([
+      this.rentalRepository.create({
+        car_id, user_id,
+        start_date: entrance,
+        expect_return_date: deadline
+      }),
+      this.carRepository.updateAvailable(car_id)
+    ])
 
     return rental
   }

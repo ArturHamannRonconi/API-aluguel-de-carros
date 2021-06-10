@@ -1,4 +1,4 @@
-type AddIndo = {
+type UserAddIndo = {
   email?: string
   username?: string
   password?: string
@@ -6,4 +6,4 @@ type AddIndo = {
   avatar?: string
 }
 
-export default AddIndo
+export default UserAddIndo

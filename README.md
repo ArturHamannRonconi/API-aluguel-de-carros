@@ -62,4 +62,15 @@
 - NÃO DEVE ser possível cadastrar um novo aluguél caso já exista um aberto para o mesmo usuário.
 - NÃO DEVE ser possível cadastrar um novo aluguél caso já exista um aberto para o mesmo carro.
 ---
+## Devolução de carro
 
+**RF**
+- DEVE ser possível realizar a devolução de um carro
+
+**RN**
+- CASO o carro for devolvido com menos de 24h será cobrada a diária completa.
+- Ao realizar a devolução o carro DEVERÁ ser liberado para outro alugél.
+- Ao realizar a devolução o usuário DEVERÁ ser liberado para outro alugél.
+- Ao realizar a devolução DEVERÁ ser calculado o total do aluguél.
+- CASO o horário de devolução seja superior ao previsto para entrega, deverá ser cobrada uma multa proporcional aos dias de atraso.
+- CASO haja multa, deverá ser somada ao total do alugél.

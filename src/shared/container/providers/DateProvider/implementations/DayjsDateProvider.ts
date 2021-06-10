@@ -13,6 +13,19 @@ class DayjsDateProvider implements IDateProvider
     dayjs.extend(customParseFormat)
   }
 
+
+  public now(): Date
+  {
+    return dayjs().toDate()
+  }
+
+  public compareInDays(start_date: Date, end_date: Date): number
+  {
+    const differenceInHours = dayjs(start_date).diff(end_date, 'days')
+
+    return differenceInHours
+  }
+
   public formatDate({ start_date, expect_return_date, formatDate }: FormatDate): FormatedDate
   {
     const entrance = dayjs(start_date, formatDate).toDate()

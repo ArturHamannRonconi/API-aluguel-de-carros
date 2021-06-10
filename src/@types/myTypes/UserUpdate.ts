@@ -1,8 +1,8 @@
-import AddInfo from '@myTypes/AddInfo'
+import UserAddIndo from '@myTypes/UserAddInfo'
 
 type UserUpdate = {
   user_id: string
-  add_info: AddInfo
+  add_info: UserAddIndo
 }
 
 export default UserUpdate

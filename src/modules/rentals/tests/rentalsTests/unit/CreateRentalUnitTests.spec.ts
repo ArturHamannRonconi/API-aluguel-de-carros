@@ -1,11 +1,12 @@
+import CarRepositoryInMemory from '@cars/repositories/in-memory/CarRepositoryInMemory'
 import RentalRepositoryInMemory from '@rentals/repositories/in-memory/RentalRepositoryInMemory'
-import IRentalRepository from '@rentals/repositories/interfaces/IRentalRepository'
 import CreateRentalService from '@rentals/services/rentalServices/CreateRentalService'
 import AppError from '@shared/errors/AppError'
 
 
 describe('Create a rental car', () => {
-  let rentalRepository: IRentalRepository
+  let rentalRepository: RentalRepositoryInMemory
+  let carRepository: CarRepositoryInMemory
   let createRentalService: CreateRentalService 
 
   const newRental = {
@@ -35,7 +36,8 @@ describe('Create a rental car', () => {
 
   beforeAll(() => {
     rentalRepository = new RentalRepositoryInMemory()
-    createRentalService = new CreateRentalService(rentalRepository)
+    carRepository = new CarRepositoryInMemory
+    createRentalService = new CreateRentalService(rentalRepository, carRepository)
   })
   
   it('Should be able to register a rental car', async () => {

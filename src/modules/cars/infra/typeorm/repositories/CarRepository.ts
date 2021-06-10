@@ -6,6 +6,7 @@ import CarTypeOrm from '@cars/infra/typeorm/entities/CarTypeOrm'
 import ICar from '@cars/entities/interfaces/ICar'
 import ListCarByNameCategoryAndBrand from '@myTypes/ListCarByNameCategoryAndBrand'
 import UpdateCar from '@myTypes/UpdateCar'
+import CarCost from '@myTypes/CarCost'
 
 class CarRepository implements ICarRepository
 {
@@ -14,6 +15,28 @@ class CarRepository implements ICarRepository
   constructor()
   {
     this.repository = getRepository(CarTypeOrm)
+  }
+
+  public async getCarCost(car_id: string): Promise<CarCost>
+  {
+    const carCost = await this.repository.findOne(car_id, {
+      select: ['fine_amount', 'daily_rate']
+    })
+
+    return carCost
+  }
+
+  public async updateAvailable(id: string): Promise<void>
+  {
+    const { available } = await this.repository
+      .findOne(id, { select: ['available'] })
+
+    await this.repository
+      .createQueryBuilder()
+      .update()
+      .set({ available: !available })
+      .where('id = :id', { id })
+      .execute()
   }
 
   public async update(id: string, updateCar: UpdateCar): Promise<CarTypeOrm>
