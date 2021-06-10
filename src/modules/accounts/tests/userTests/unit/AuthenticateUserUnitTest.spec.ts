@@ -1,11 +1,10 @@
 import AppError from '@shared/errors/AppError'
-import IUserRepository from '@accounts/repositories/interfaces/IUserRepository'
 import UserRepositoryInMemory from '@accounts/repositories/in-memory/UserRepositoryInMemory'
 import AuthenticateUserService from '@accounts/services/userServices/AuthenticateUserService'
 
 describe('Authenticate User', () => {
   let authenticateUserService: AuthenticateUserService
-  let userRepository: IUserRepository
+  let userRepository: UserRepositoryInMemory
 
   const user = {
     username: 'userTest',

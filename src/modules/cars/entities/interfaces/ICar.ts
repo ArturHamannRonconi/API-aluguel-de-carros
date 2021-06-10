@@ -1,5 +1,6 @@
-import Specification from '../implementations/Specification'
+import ICarImage from './ICarImage'
 import ICategory from './ICategory'
+import ISpecification from './ISpecification'
 
 interface ICar 
 {
@@ -13,7 +14,8 @@ interface ICar
   brand: string
   category_id: string
   category: ICategory
-  specifications: Specification[]
+  images: ICarImage[]
+  specifications: ISpecification[]
   created_at: Date
 }
 

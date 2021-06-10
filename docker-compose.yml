@@ -3,9 +3,9 @@ version: "3.9"
 services:
   database:
     image: postgres
-    container_name: database_ignite
+    container_name: database_rentx
     restart: always
-    ports: 
+    ports:
       - 5432:5432
     environment:
       POSTGRES_USER: docker
@@ -13,6 +13,18 @@ services:
       POSTGRES_DB: rentx
     volumes:
       - pgdata:/data/postgres
+  database_test:
+    image: postgres
+    container_name: database_rentx_test
+    restart: always
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: ignite
+      POSTGRES_DB: rentx_test
+    volumes:
+      - pgdata_test:/data/postgres
   app:
     build: .
     container_name: rentx
@@ -27,4 +39,6 @@ services:
       - database
 volumes:
   pgdata:
+    driver: local
+  pgdata_test:
     driver: local

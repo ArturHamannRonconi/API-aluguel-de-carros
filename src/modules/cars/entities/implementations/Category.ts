@@ -7,7 +7,7 @@ class Category implements ICategory
   name: string
   description: string
   created_at: Date
-  cars: Car[] 
+  cars: Car[]
 }
 
 export default Category

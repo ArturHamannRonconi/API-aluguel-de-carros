@@ -42,7 +42,7 @@ class CarRepository implements ICarRepository
     await this.repository.save(car)
   }
 
-  public async findById(id: string): Promise<ICar>
+  public async findById(id: string): Promise<CarTypeOrm>
   {
     return this.repository.findOne(id,{
       relations: ['specifications']

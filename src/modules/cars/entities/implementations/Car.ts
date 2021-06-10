@@ -1,4 +1,5 @@
 import ICar from '../interfaces/ICar'
+import CarImage from './CarImage'
 import Category from './Category'
 import Specification from './Specification'
 
@@ -16,6 +17,7 @@ class Car implements ICar
   category: Category
   specifications: Specification[]
   created_at: Date
+  images: CarImage[]
 }
 
 export default Car

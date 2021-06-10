@@ -11,7 +11,7 @@ export class CreateCategories1621890655557 implements MigrationInterface
           { name: 'id', type: 'uuid', isPrimary: true, generationStrategy: 'uuid', isGenerated: true },
           { name: 'name', type: 'varchar', isNullable: false },
           { name: 'description', type: 'varchar', isNullable: false },
-          { name: 'created_at', type: 'timestamp', default: 'now()' }
+          { name: 'created_at', type: 'timestamp', default: 'NOW()' }
         ]
       })
     )
