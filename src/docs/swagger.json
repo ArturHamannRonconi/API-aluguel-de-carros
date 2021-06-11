@@ -12,6 +12,7 @@
         "tags": ["Category"],
         "summary": "Create a category",
         "description": "Create a new category for the with a name and a description for the an a vehicle",
+        "security": [{"bearerAuth": []}],
         "requestBody": {
           "content": {
             "application/json": {
@@ -84,6 +85,7 @@
         "tags": ["Category"],
         "summary": "Upload new category",
         "description": "Upload new category",
+        "security": [{"bearerAuth": []}],
         "requestBody": {
           "content": {
             "multipart/form-data": {
@@ -114,6 +116,7 @@
         "tags": ["Specification"],
         "summary": "Create a specification",
         "description": "Create a new specification",
+        "security": [{"bearerAuth": []}],
         "requestBody": {
           "content": {
             "application/json": {
@@ -139,6 +142,66 @@
       "get": {
         "tags": ["Specification"]
       }
+    },
+    "/users/authenticate": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Authentication user",
+        "description": "Authentication user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "User",
+                "properties": {
+                  "email": { "type": "string" },
+                  "username": { "type": "string" },
+                  "password": { "type": "string" }
+                }
+              },
+              "example": {
+                "email": "arturhronconi@gmail.com",
+                "username": "arturhr",
+                "password": "password123"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "success" },
+          "400": { "description": "Email, username or password incorrect" }
+        }
+      }
+    },
+    "/cars": {
+      "post": {
+        "tags": ["Cars"],
+        "summary": "Add a new car in the api",
+        "description": "Create a new Car",
+        "security": [{"bearerAuth": []}],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Cars"
+              },
+              "example": {
+                "name": "Audi A3",
+                "description": "Carro bonito",
+                "daily_rate": 140,
+                "license_plate": "DEF-33",
+                "fine_amount": 100,
+                "brand": "Audi",
+                "category_id": "17daaa9e-c1e4-4e7a-900b-1e073a7ab692"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Created" },
+          "400": { "description": "Car already exists" }
+        }
+      }
     }
   },
   "definitions": {
@@ -151,6 +214,27 @@
         "description": {
           "type": "string"
         }
+      }
+    },
+    "Cars": {
+      "type": "Object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "daily_rate": { "type": "number" },
+        "license_plate": { "type": "string" },
+        "fine_amount": { "type": "number" },
+        "brand": { "type": "string" },
+        "category_id": { "type": "string" }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": { 
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "berarerFormat": "JWT"
       }
     }
   }
