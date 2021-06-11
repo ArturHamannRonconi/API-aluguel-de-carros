@@ -1,3 +1,4 @@
+import Rental from '@rentals/entities/implementations/Rental'
 import ICar from '../interfaces/ICar'
 import CarImage from './CarImage'
 import Category from './Category'
@@ -17,6 +18,7 @@ class Car implements ICar
   category: Category
   specifications: Specification[]
   created_at: Date
+  rentals: Rental[]
   images: CarImage[]
 }
 

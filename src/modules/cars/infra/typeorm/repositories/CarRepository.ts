@@ -83,7 +83,7 @@ class CarRepository implements ICarRepository
   }
 
   public async findAvailable(listBy: ListCarByNameCategoryAndBrand = {}): Promise<ICar[]>
-  {
+  { 
     return this.repository.find({
       relations: ['specifications', 'category'],
       where: { available: true, ...listBy }

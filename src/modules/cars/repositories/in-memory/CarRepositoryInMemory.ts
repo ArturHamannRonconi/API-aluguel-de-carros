@@ -52,6 +52,19 @@ class CarRepositoryInMemory implements ICarRepository
         available: false,
         created_at: new Date,
         specifications: []
+      }),
+      Object.assign(new Car(), {
+        id: 'b9fdc2d9-6f9f-480f-be3c-13601c096a1a',
+        name: 'Name Car Four',
+        description: 'Description Car Four',
+        daily_rate: 4250,
+        license_plate: 'CBA-4321',
+        fine_amount: 4123,
+        brand: 'Brand Four',
+        category_id: 'b17af4e0-c2c3-4003-af17-6df6e2928ee8',
+        available: false,
+        created_at: new Date,
+        specifications: []
       })
     ]
   }

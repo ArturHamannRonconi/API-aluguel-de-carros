@@ -4,6 +4,7 @@ import ICar from '@cars/entities/interfaces/ICar'
 import CategoryTypeOrm from './CategoryTypeOrm'
 import SpecificationTypeOrm from './SpecificationTypeOrm'
 import CarImageTypeOrm from './CarImageTypeOrm'
+import RentalTypeOrm from '@rentals/infra/typeorm/entities/RetalTypeOrm'
 
 @Entity('cars')
 class CarTypeOrm implements ICar
@@ -38,9 +39,12 @@ class CarTypeOrm implements ICar
   @ManyToOne(() => CategoryTypeOrm, category => category.cars)
   @JoinColumn({ name: 'category_id' })
   category: CategoryTypeOrm
-
-  @OneToMany(() => CarImageTypeOrm, image => image.car_id)
+  
+  @OneToMany(() => CarImageTypeOrm, image => image.car)
   images: CarImageTypeOrm[]
+
+  @OneToMany(() => RentalTypeOrm, rental => rental.car)
+  rentals: RentalTypeOrm[]
 
   @ManyToMany(() => SpecificationTypeOrm, specification => specification.cars)
   @JoinTable({

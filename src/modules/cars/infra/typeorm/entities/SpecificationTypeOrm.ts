@@ -15,7 +15,7 @@ class SpecificationTypeOrm implements ISpecification
   @Column()
   description: string
 
-  @ManyToMany(() => CarTypeOrm)
+  @ManyToMany(() => CarTypeOrm, car => car.specifications)
   @JoinTable({
     name: 'specifications_cars',
     joinColumn: { name: 'specification_id' },

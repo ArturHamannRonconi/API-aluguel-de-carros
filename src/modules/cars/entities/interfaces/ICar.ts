@@ -1,3 +1,4 @@
+import IRental from '@rentals/entities/interfaces/IRental'
 import ICarImage from './ICarImage'
 import ICategory from './ICategory'
 import ISpecification from './ISpecification'
@@ -16,6 +17,7 @@ interface ICar
   category: ICategory
   images: ICarImage[]
   specifications: ISpecification[]
+  rentals: IRental[]
   created_at: Date
 }
 

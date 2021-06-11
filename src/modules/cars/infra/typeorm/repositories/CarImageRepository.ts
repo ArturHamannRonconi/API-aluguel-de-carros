@@ -16,7 +16,6 @@ class CarImageRepository implements ICarImageRepository
   public async create({ car_id, image_name }: CreateCarImage): Promise<CarImageTypeOrm>
   {
     const carImage = this.repository.create({ car_id, image_name })
-
     return await this.repository.save(carImage)
   }
   
