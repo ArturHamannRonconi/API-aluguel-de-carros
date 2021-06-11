@@ -15,9 +15,23 @@ class RentalRepository implements IRentalRepository
     this.repository = getRepository(RentalTypeOrm)
   }
 
-  public async update(rent_id: string, add_info: RentalAddInfo): Promise<void>
+  public async findAllRentalByUserId(user_id: string): Promise<IRental[]>
   {
-    await this.repository.update(rent_id, add_info)
+    return this.repository.find({
+      where: { user_id },
+      relations: ['car']
+    })
+  }
+
+  public async update(rent_id: string, add_info: RentalAddInfo): Promise<Date>
+  {
+    const now = new Date()
+    await this.repository.update(rent_id, {
+      ...add_info,
+      updated_at: now
+    })
+
+    return now
   }
 
   public async create(rent: CreateRentalRepo): Promise<RentalTypeOrm>
@@ -50,8 +64,7 @@ class RentalRepository implements IRentalRepository
   public async findLastRentalByUserId(user_id: string): Promise<IRental>
   {
     const rental = this.repository.findOne({
-      where: { user_id, end_date: null },
-      
+      where: { user_id, end_date: null }
     })
 
     return rental

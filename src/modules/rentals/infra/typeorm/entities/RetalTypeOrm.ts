@@ -1,6 +1,8 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
 
 import IRental from '@rentals/entities/interfaces/IRental'
+import CarTypeOrm from '@cars/infra/typeorm/entities/CarTypeOrm'
+import UserTypeOrm from '@accounts/infra/typeorm/entities/UserTypeOrm'
 
 @Entity('rentals')
 class RentalTypeOrm implements IRental
@@ -10,9 +12,17 @@ class RentalTypeOrm implements IRental
 
   @Column()
   car_id: string
+
+  @ManyToOne(() => CarTypeOrm, car => car.rentals)
+  @JoinColumn({ name: 'car_id' })
+  car: CarTypeOrm
   
   @Column()
   user_id: string
+  
+  @ManyToOne(() => UserTypeOrm, user => user.rentals)
+  @JoinColumn({ name: 'user_id' })
+  user: UserTypeOrm
   
   @Column()
   start_date: Date

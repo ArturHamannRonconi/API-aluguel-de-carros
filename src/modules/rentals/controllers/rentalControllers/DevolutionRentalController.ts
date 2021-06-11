@@ -12,7 +12,7 @@ class DevolutionRentalController
     const devolutionRentalService = container.resolve(DevolutionRentalService)
     const rental = await devolutionRentalService.execute(user_id)
 
-    return response.status(200).json(rental)
+    return response.json(rental)
   }
 }
 

@@ -32,14 +32,15 @@ class DevolutionRentalService
     }
 
     const totalPayment = this.calculateTotalPayment(carCost, dailyExpected)
-  
-    rental.total = totalPayment
-    rental.end_date = DayjsDateProvider.now()
+    const add_info = {
+      total: totalPayment,
+      end_date: DayjsDateProvider.now()
+    }
     
-    await this.rentalRepository.create(rental)
+    const now = await this.rentalRepository.update(rental.id, add_info)
     await this.carRepository.updateAvailable(rental.car_id)
 
-    return rental
+    return Object.assign(rental, { ...add_info, updated_at: now.toISOString() })
   }
 
   private calculateTotalPayment(carCost: CarCost, dailyExpected: DailyExpected): number
