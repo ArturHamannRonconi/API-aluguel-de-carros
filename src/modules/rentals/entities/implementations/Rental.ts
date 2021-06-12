@@ -1,3 +1,4 @@
+import User from '@accounts/entities/implementations/User'
 import Car from '@cars/entities/implementations/Car'
 import IRental from '@rentals/entities/interfaces/IRental'
 
@@ -13,6 +14,7 @@ class Rental implements IRental
   created_at: Date
   updated_at: Date
   car: Car
+  user: User
 }
 
 export default Rental 
