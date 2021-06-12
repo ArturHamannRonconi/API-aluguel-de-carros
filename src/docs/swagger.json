@@ -7,6 +7,51 @@
     "contact": { "email": "arturhronconi@gmail.com" }
   },
   "paths": {
+    "/car_images/{car_id}": {
+      "post": {
+        "tags": ["Cars"],
+        "summary": "Upload car images",
+        "description": "Post car images",
+        "security": [
+          { "bearerAuth": [] }
+        ],
+        "parameters": [
+          {
+            "name": "car_id",
+            "in": "path",
+            "description": "Car id",
+            "required": true,
+            "scheme": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "Object",
+                "properties": {
+                  "images": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "404": {
+            "description": "Car not found"
+          }
+        }
+      }
+    },
     "/categories": {
       "post": {
         "tags": ["Category"],
