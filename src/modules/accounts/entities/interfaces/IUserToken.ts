@@ -6,7 +6,7 @@ interface IUserToken
   refresh_token: string
   user_id: string
   user: IUser
-  expires_dae: Date
+  expires_date: Date
   created_at: Date
 }
 

@@ -7,7 +7,7 @@ class UserToken implements IUserToken
   refresh_token: string;
   user_id: string;
   user: User;
-  expires_dae: Date;
+  expires_date: Date;
   created_at: Date;
 }
 

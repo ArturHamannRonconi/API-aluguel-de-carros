@@ -20,7 +20,7 @@ class UserTokenTypeOrm implements IUserToken
   user: UserTypeOrm;
 
   @Column()
-  expires_dae: Date;
+  expires_date: Date;
 
   @CreateDateColumn()
   created_at: Date;
