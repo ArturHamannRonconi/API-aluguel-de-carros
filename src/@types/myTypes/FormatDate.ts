@@ -1,4 +1,4 @@
-type FormatDate =
+interface FormatDate 
 {
   start_date: string
   expect_return_date: string

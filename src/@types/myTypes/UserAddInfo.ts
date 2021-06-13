@@ -1,4 +1,4 @@
-type UserAddIndo = {
+interface UserAddIndo {
   email?: string
   username?: string
   password?: string

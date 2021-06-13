@@ -1,3 +1,3 @@
-type ListCarByNameCategoryAndBrand = { name?: string, category_id?: string, brand?: string }
+interface ListCarByNameCategoryAndBrand { name?: string, category_id?: string, brand?: string }
 
 export default ListCarByNameCategoryAndBrand

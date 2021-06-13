@@ -1,6 +1,6 @@
 import ISpecification from '@cars/entities/interfaces/ISpecification'
 
-type CreateCar = {
+interface CreateCar {
   name: string
   description: string
   daily_rate: number

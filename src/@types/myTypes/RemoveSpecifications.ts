@@ -1,3 +1,3 @@
-type RemoveSpecifications = { id: string, specifications: string[] }
+interface RemoveSpecifications { id: string, specifications: string[] }
 
 export default RemoveSpecifications

@@ -1,3 +1,3 @@
-type CreateCategory = { name: string, description: string }
+interface CreateCategory { name: string, description: string }
 
 export default CreateCategory

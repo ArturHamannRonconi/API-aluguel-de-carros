@@ -1,4 +1,4 @@
-type CreateRental = {
+interface CreateRental {
   car_id: string
   user_id: string
   start_date: string

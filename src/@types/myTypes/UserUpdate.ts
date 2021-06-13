@@ -1,6 +1,6 @@
 import UserAddIndo from '@myTypes/UserAddInfo'
 
-type UserUpdate = {
+interface UserUpdate {
   user_id: string
   add_info: UserAddIndo
 }

@@ -1,3 +1,3 @@
-type ImportCategory = { name: string, description: string }
+interface ImportCategory { name: string, description: string }
 
 export default ImportCategory

@@ -1,4 +1,4 @@
-type RentalAddInfo =
+interface RentalAddInfo 
 {
   start_date?: Date
   end_date?: Date

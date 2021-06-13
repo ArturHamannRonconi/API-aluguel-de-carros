@@ -1,4 +1,4 @@
-type FormatedDate =
+interface FormatedDate 
 {
   entrance: Date
   deadline: Date

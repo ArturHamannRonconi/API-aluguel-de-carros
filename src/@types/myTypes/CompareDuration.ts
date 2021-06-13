@@ -1,6 +1,6 @@
 import { OpUnitType } from 'dayjs'
 
-type CompareDuration = 
+interface CompareDuration 
 {
   expect_return_date: string
   start_date: string

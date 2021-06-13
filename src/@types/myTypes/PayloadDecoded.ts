@@ -1,4 +1,4 @@
-type PayloadDecoded =  {
+interface PayloadDecoded  {
   iat: string
   ext: string
   sub: string

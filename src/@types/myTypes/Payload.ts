@@ -1,3 +1,3 @@
-type Payload = string | Record<string, unknown> | Buffer
+interface Payload string | Record<string, unknown> | Buffer
 
 export default Payload

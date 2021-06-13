@@ -1,6 +1,6 @@
 import ISpecification from '@cars/entities/interfaces/ISpecification'
 
-type UpdateCar = {
+interface UpdateCar {
   specifications?: ISpecification[],
   fine_amount?: number,
   available?: boolean,

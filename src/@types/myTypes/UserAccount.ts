@@ -1,4 +1,4 @@
-type UserAccount = {
+interface UserAccount {
   email: string
   username: string
   password: string

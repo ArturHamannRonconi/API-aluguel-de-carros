@@ -1,4 +1,4 @@
-type CreateRentalRepo = {
+interface CreateRentalRepo {
   car_id: string
   user_id: string
   start_date: Date

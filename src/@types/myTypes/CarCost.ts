@@ -1,4 +1,4 @@
-type CarCost = {
+interface CarCost {
   daily_rate: number
   fine_amount: number
 }
