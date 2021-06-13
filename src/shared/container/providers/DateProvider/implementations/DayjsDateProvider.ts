@@ -13,6 +13,10 @@ class DayjsDateProvider implements IDateProvider
     dayjs.extend(customParseFormat)
   }
 
+  public addDays(days: number): Date
+  {
+    return dayjs().add(days, 'days').toDate()
+  }
 
   public now(): Date
   {
@@ -47,7 +51,6 @@ class DayjsDateProvider implements IDateProvider
 
     return deadline.subtract(value, unit).isBefore(entrance)
   }
-
 }
 
 export default new DayjsDateProvider()
