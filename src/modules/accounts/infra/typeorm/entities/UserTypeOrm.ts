@@ -2,6 +2,7 @@ import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } f
 
 import IUser from '@accounts/entities/interfaces/IUser'
 import RentalTypeOrm from '@rentals/infra/typeorm/entities/RetalTypeOrm'
+import UserTokenTypeOrm from './UserTokenTypeOrm'
 
 @Entity('users')
 class UserTypeOrm implements IUser
@@ -21,6 +22,9 @@ class UserTypeOrm implements IUser
   @OneToMany(() => RentalTypeOrm, rental => rental.user)
   rentals: RentalTypeOrm[]
   
+  @OneToMany(() => UserTokenTypeOrm, token => token.user)
+  tokens: UserTokenTypeOrm[]
+
   @Column()
   password: string
 

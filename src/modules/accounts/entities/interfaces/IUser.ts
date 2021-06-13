@@ -1,4 +1,5 @@
 import IRental from '@rentals/entities/interfaces/IRental'
+import IUserToken from './IUserToken'
 
 interface IUser
 {
@@ -10,8 +11,9 @@ interface IUser
   driver_license: string
   is_admin: boolean
   rentals: IRental[]
+  tokens: IUserToken[]
   avatar: string
-  created_at: Date
+  created_at: Date 
 }
 
 export default IUser
