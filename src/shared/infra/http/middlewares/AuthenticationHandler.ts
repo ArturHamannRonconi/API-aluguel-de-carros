@@ -2,9 +2,9 @@ import { Request, Response, NextFunction } from 'express'
 import { verify } from 'jsonwebtoken'
 
 import PayloadDecoded from '@myTypes/PayloadDecoded'
-import UserRepository from '@accounts/infra/typeorm/repositories/UserRepository'
 import AppError from '@shared/errors/AppError'
 import Auth from '@config/Auth'
+import UserTokenRepository from '@accounts/infra/typeorm/repositories/UserTokenRepository'
 
 class AuthenticationHandler
 {
@@ -16,11 +16,14 @@ class AuthenticationHandler
 
     const token = authHeader.split(' ').pop()
 
-    const payload = verify(token, Auth.PRIVATE_KEY_TOKEN) as PayloadDecoded
+    const payload = verify(token, Auth.PRIVATE_KEY_REFRESH_TOKEN) as PayloadDecoded
     if(!payload) throw new AppError('Invalid Token', 401)
   
-    const userRepository = new UserRepository() 
-    const user = await userRepository.findById(payload.sub)
+    const userTokenRepository = new UserTokenRepository()
+    const user = await userTokenRepository.findByUserIdAndRefreshToken(
+      payload.sub,
+      token
+    )
     
     if(!user) throw new AppError('User does not exists!', 401)
       

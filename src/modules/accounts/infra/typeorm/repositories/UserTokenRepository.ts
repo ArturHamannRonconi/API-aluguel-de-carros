@@ -13,6 +13,16 @@ class UserTokenRepository implements IUserTokenRepository
     this.repository = getRepository(UserTokenTypeOrm)
   }
 
+  public async deleteById(id: string): Promise<void>
+  {
+    await this.repository.delete(id)
+  }
+
+  public async findByUserIdAndRefreshToken(user_id: string, refresh_token: string): Promise<UserTokenTypeOrm>
+  {
+    return this.repository.findOne({ user_id, refresh_token })
+  }
+
   public async create(tokenInfo: CreateUserToken): Promise<UserTokenTypeOrm>
   {
     const token = this.repository.create(tokenInfo)

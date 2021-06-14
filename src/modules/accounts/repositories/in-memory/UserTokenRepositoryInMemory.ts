@@ -12,6 +12,10 @@ class UserTokenRepositoryInMemory implements IUserTokenRepository
   {
     this.repository = []
   }
+  public async findByUserId(user_id: string): Promise<UserToken[]>
+  {
+    return this.repository.filter(token => token.user_id === user_id)
+  }
 
   public async create(tokenInfo: CreateUserToken): Promise<UserToken>
   {

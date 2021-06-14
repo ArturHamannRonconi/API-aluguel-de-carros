@@ -4,6 +4,7 @@ import multer from 'multer'
 import authenticationHandler from '@shared/infra/http/middlewares/AuthenticationHandler'
 import createUserController from '@accounts/controllers/userControllers/CreateUserController'
 import authenticateUserController from '@accounts/controllers/userControllers/AuthenticateUserController'
+import refreshTokenCOntroller from '@accounts/controllers/userControllers/RefreshTokenController'
 import updateUserAvatarController from '@accounts/controllers/userControllers/UpdateUserAvatarController'
 import uploadConfig from '@config/UploadConfig'
 
@@ -15,6 +16,9 @@ usersRoutes.route('/')
 
 usersRoutes.route('/authenticate')
   .post(authenticateUserController.handle)
+
+usersRoutes.route('/refresh_token')
+  .post(refreshTokenCOntroller.handle)
 
 usersRoutes.route('/avatar')
   .patch(
