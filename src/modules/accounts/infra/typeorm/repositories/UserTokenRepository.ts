@@ -3,6 +3,7 @@ import { getRepository, Repository } from 'typeorm'
 import IUserTokenRepository from '@accounts/repositories/interfaces/IUserTokenRepository'
 import CreateUserToken from '@myTypes/CreateUserToken'
 import UserTokenTypeOrm from '../entities/UserTokenTypeOrm'
+import IUserToken from '@accounts/entities/interfaces/IUserToken'
 
 class UserTokenRepository implements IUserTokenRepository
 {
@@ -11,6 +12,11 @@ class UserTokenRepository implements IUserTokenRepository
   constructor()
   {
     this.repository = getRepository(UserTokenTypeOrm)
+  }
+
+  public async findByToken(token: string): Promise<IUserToken>
+  {
+    return this.repository.findOne({ refresh_token: token })
   }
 
   public async deleteById(id: string): Promise<void>

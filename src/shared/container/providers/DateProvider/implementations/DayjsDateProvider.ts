@@ -13,6 +13,16 @@ class DayjsDateProvider implements IDateProvider
     dayjs.extend(customParseFormat)
   }
 
+  public verifyTimeHasBeenExpired(expires_date: Date): boolean
+  {
+    return dayjs(expires_date).isBefore(this.now())
+  }
+
+  public addHours(hours: number): Date
+  {
+    return dayjs().add(hours, 'hours').toDate()
+  }
+
   public addDays(days: number): Date
   {
     return dayjs().add(days, 'days').toDate()
@@ -53,4 +63,4 @@ class DayjsDateProvider implements IDateProvider
   }
 }
 
-export default new DayjsDateProvider()
+export default DayjsDateProvider

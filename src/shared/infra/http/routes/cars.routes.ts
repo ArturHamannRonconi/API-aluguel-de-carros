@@ -18,7 +18,7 @@ carsRoutes.route('/')
 carsRoutes.route('/available')
   .get(listAvailableCarController.handle)
 
-carsRoutes.route('/:car_id/add_specifications')
+carsRoutes.route('/add-specifications/:car_id')
   .put(
     authenticationHandler.exec,
     authorizationHandler.exec,

@@ -13,9 +13,9 @@ const upload = multer(uploadConfig.options('cars_image'))
 
 carImagesRoutes.route('/:car_id')
   .post(
-    upload.array('images'),
     authenticationHandler.exec,
     authorizationHandler.exec,
+    upload.array('images'),
     uploadCarImageController.handle
   )
 

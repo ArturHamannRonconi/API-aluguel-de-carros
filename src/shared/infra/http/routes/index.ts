@@ -13,7 +13,7 @@ routes.use('/categories', categoriesRoutes)
 routes.use('/specifications', specificationsRoutes)
 routes.use('/users', usersRoutes)
 routes.use('/cars', carsRoutes)
-routes.use('/car_images', carImagesRoutes)
+routes.use('/car-images', carImagesRoutes)
 routes.use('/rentals', rentalRoutes)
 
 export default routes

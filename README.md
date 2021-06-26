@@ -74,3 +74,14 @@
 - Ao realizar a devolução DEVERÁ ser calculado o total do aluguél.
 - CASO o horário de devolução seja superior ao previsto para entrega, deverá ser cobrada uma multa proporcional aos dias de atraso.
 - CASO haja multa, deverá ser somada ao total do alugél.
+
+## Recuperação de senha
+
+**RF**
+- Deve ser possível o usuário recuperar a senha informando o email
+- O usuário deve receber um email com o passo a passo da recuperação de senha
+- O usuário deve conseguir inserir uma nova senha
+
+**RN**
+- O usuário precisa informar um nova senha
+- O link enviado para a recuperação deve expirar em 3 horas

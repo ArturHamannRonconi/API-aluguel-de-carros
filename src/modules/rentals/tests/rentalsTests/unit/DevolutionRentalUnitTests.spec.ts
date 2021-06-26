@@ -2,19 +2,27 @@ import CarRepositoryInMemory from '@cars/repositories/in-memory/CarRepositoryInM
 import Rental from '@rentals/entities/implementations/Rental'
 import RentalRepositoryInMemory from '@rentals/repositories/in-memory/RentalRepositoryInMemory'
 import DevolutionRentalService from '@rentals/services/rentalServices/DevolutionRentalService'
+import IDateProvider from '@shared/container/providers/DateProvider/IDateProvider'
+import DayjsDateProvider from '@shared/container/providers/DateProvider/implementations/DayjsDateProvider'
 import AppError from '@shared/errors/AppError'
 
 describe('Devolution rental', () => {
   let rentalRepository: RentalRepositoryInMemory
   let carRepository: CarRepositoryInMemory
   let devolutionRentalService: DevolutionRentalService
-  
+  let dateProvider: IDateProvider
+
   const user_id = 'e357f477-16f4-4db7-8017-b6d2d5d8519b'
 
   beforeAll(() => {
     rentalRepository = new RentalRepositoryInMemory()
     carRepository = new CarRepositoryInMemory()
-    devolutionRentalService = new DevolutionRentalService(rentalRepository, carRepository)
+    dateProvider = new DayjsDateProvider()
+    devolutionRentalService = new DevolutionRentalService(
+      rentalRepository,
+      carRepository,
+      dateProvider
+    )
   })
   
   it('Should be able to devolution a car', async () => {

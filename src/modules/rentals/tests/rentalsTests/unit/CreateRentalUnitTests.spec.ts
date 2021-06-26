@@ -1,13 +1,16 @@
 import CarRepositoryInMemory from '@cars/repositories/in-memory/CarRepositoryInMemory'
 import RentalRepositoryInMemory from '@rentals/repositories/in-memory/RentalRepositoryInMemory'
 import CreateRentalService from '@rentals/services/rentalServices/CreateRentalService'
+import IDateProvider from '@shared/container/providers/DateProvider/IDateProvider'
+import DayjsDateProvider from '@shared/container/providers/DateProvider/implementations/DayjsDateProvider'
 import AppError from '@shared/errors/AppError'
 
 
 describe('Create a rental car', () => {
   let rentalRepository: RentalRepositoryInMemory
-  let carRepository: CarRepositoryInMemory
   let createRentalService: CreateRentalService 
+  let dateProvider: IDateProvider
+  let carRepository: CarRepositoryInMemory
 
   const newRental = {
     car_id: '2eafd3bb-0ff3-4a53-86fa-5dcb1cd32df9',
@@ -36,8 +39,13 @@ describe('Create a rental car', () => {
 
   beforeAll(() => {
     rentalRepository = new RentalRepositoryInMemory()
-    carRepository = new CarRepositoryInMemory
-    createRentalService = new CreateRentalService(rentalRepository, carRepository)
+    carRepository = new CarRepositoryInMemory()
+    dateProvider = new DayjsDateProvider()
+    createRentalService = new CreateRentalService(
+      rentalRepository,
+      carRepository,
+      dateProvider
+    )
   })
   
   it('Should be able to register a rental car', async () => {

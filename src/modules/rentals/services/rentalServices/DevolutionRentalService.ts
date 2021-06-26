@@ -5,8 +5,8 @@ import CarCost from '@myTypes/CarCost'
 import DailyExpected from '@myTypes/DailyExpected'
 import IRental from '@rentals/entities/interfaces/IRental'
 import IRentalRepository from '@rentals/repositories/interfaces/IRentalRepository'
-import DayjsDateProvider from '@shared/container/providers/DateProvider/implementations/DayjsDateProvider'
 import AppError from '@shared/errors/AppError'
+import IDateProvider from '@shared/container/providers/DateProvider/IDateProvider'
 
 @injectable()
 class DevolutionRentalService
@@ -15,7 +15,9 @@ class DevolutionRentalService
     @inject('RentalRepository')
     private rentalRepository: IRentalRepository,
     @inject('CarRepository')
-    private carRepository: ICarRepository
+    private carRepository: ICarRepository,
+    @inject('DateProvider')
+    private dateProvider: IDateProvider
   ) {  }
   
   public async execute(user_id: string): Promise<IRental>
@@ -34,7 +36,7 @@ class DevolutionRentalService
     const totalPayment = this.calculateTotalPayment(carCost, dailyExpected)
     const add_info = {
       total: totalPayment,
-      end_date: DayjsDateProvider.now()
+      end_date: this.dateProvider.now()
     }
     
     const now = await this.rentalRepository.update(rental.id, add_info)
@@ -56,7 +58,7 @@ class DevolutionRentalService
 
   private calculateDaily(daily_rate: number, dailyExpected: DailyExpected): number
   {
-    const daily = DayjsDateProvider.compareInDays(
+    const daily = this.dateProvider.compareInDays(
       dailyExpected.start_date,
       dailyExpected.expect_return_date
     ) 
@@ -67,9 +69,9 @@ class DevolutionRentalService
 
   private calculateFineForDelay(fine_amount: number, dailyExpected: DailyExpected): number
   {
-    const daysOfDelay = DayjsDateProvider.compareInDays(
+    const daysOfDelay = this.dateProvider.compareInDays(
       dailyExpected.expect_return_date,
-      DayjsDateProvider.now()
+      this.dateProvider.now()
     )
     const fineForDelay = daysOfDelay * fine_amount
 

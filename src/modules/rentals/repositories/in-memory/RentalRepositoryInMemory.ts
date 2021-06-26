@@ -3,7 +3,7 @@ import { v4 as generateUUID } from 'uuid'
 import Rental from '@rentals/entities/implementations/Rental'
 import IRentalRepository from '../interfaces/IRentalRepository'
 import CreateRentalRepo from '@myTypes/CreateRentalRepo'
-import DayjsDateProvider from '@shared/container/providers/DateProvider/implementations/DayjsDateProvider'
+import DateProvider from '@shared/container/providers/DateProvider/implementations/DayjsDateProvider'
 import IRental from '@rentals/entities/interfaces/IRental'
 import RentalAddInfo from '@myTypes/RentalAddInfo'
 
@@ -13,17 +13,19 @@ class RentalRepositoryInMemory implements IRentalRepository
 
   constructor()
   {
-    const rentalDate1 = DayjsDateProvider.formatDate({
+    const dateProvider = new DateProvider()
+
+    const rentalDate1 = dateProvider.formatDate({
       start_date: '07/06/2021 16:52',
       expect_return_date: '08/06/2021 16:52',
       formatDate: 'DD/MM/YYYY HH:mm'
     })
-    const rentalDate2 = DayjsDateProvider.formatDate({
+    const rentalDate2 = dateProvider.formatDate({
       start_date: '07/06/2020 16:52',
       expect_return_date: '08/06/2020 16:52',
       formatDate: 'DD/MM/YYYY HH:mm'
     })
-    const rentalDate3 = DayjsDateProvider.formatDate({
+    const rentalDate3 = dateProvider.formatDate({
       start_date: '07/06/2019 16:52',
       expect_return_date: '08/06/2019 16:52',
       formatDate: 'DD/MM/YYYY HH:mm'

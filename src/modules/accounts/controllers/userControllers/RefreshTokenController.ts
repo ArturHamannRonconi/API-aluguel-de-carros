@@ -1,7 +1,7 @@
-import RefreshTokenService from '@accounts/services/userServices/RefreshTokenService'
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
+import RefreshTokenService from '@accounts/services/userServices/RefreshTokenService'
 class RefreshTokenController
 {
   public async handle(request: Request, response: Response): Promise<Response>

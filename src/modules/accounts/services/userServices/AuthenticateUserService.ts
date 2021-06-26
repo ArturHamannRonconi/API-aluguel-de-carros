@@ -9,7 +9,7 @@ import AuthenticateResponse from '@myTypes/AuthenticateReponse'
 import AppError from '@shared/errors/AppError'
 import IUserTokenRepository from '@accounts/repositories/interfaces/IUserTokenRepository'
 import Auth from '@config/Auth'
-import DayjsDateProvider from '@shared/container/providers/DateProvider/implementations/DayjsDateProvider'
+import IDateProvider from '@shared/container/providers/DateProvider/IDateProvider'
 
 @injectable()
 class AuthenticateUserService
@@ -18,7 +18,9 @@ class AuthenticateUserService
     @inject('UserRepository')
     private userRepository: IUserRepository,
     @inject('UserTokenRepository')
-    private userTokenRepository: IUserTokenRepository
+    private userTokenRepository: IUserTokenRepository,
+    @inject('DateProvider')
+    private dateProvider: IDateProvider
   ) {  }
 
   public async execute({ email, username, password }: UserAccount): Promise<AuthenticateResponse>
@@ -45,7 +47,7 @@ class AuthenticateUserService
 
     await this.userTokenRepository.create({
       user_id: user.id,
-      expires_date: DayjsDateProvider.addDays(Auth.EXPIRES_REFRESH_TOKEN_DAYS),
+      expires_date: this.dateProvider.addDays(Auth.EXPIRES_REFRESH_TOKEN_DAYS),
       refresh_token
     })
 

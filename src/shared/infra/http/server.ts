@@ -1,3 +1,3 @@
 import server from './index'
 
-server.listen(3333, () => console.log('Server is running...'))
+server.listen(process.env.PORT, () => console.log('Server is running...'))

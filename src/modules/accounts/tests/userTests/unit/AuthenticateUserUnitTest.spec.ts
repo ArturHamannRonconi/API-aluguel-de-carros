@@ -1,10 +1,16 @@
 import AppError from '@shared/errors/AppError'
 import UserRepositoryInMemory from '@accounts/repositories/in-memory/UserRepositoryInMemory'
 import AuthenticateUserService from '@accounts/services/userServices/AuthenticateUserService'
+import DayjsDateProvider from '@shared/container/providers/DateProvider/implementations/DayjsDateProvider'
+import IDateProvider from '@shared/container/providers/DateProvider/IDateProvider'
+import IUserTokenRepository from '@accounts/repositories/interfaces/IUserTokenRepository'
+import UserTokenRepositoryInMemory from '@accounts/repositories/in-memory/UserTokenRepositoryInMemory'
 
 describe('Authenticate User', () => {
   let authenticateUserService: AuthenticateUserService
   let userRepository: UserRepositoryInMemory
+  let dateProvider: IDateProvider
+  let userTokenReposiotyr: IUserTokenRepository
 
   const user = {
     username: 'userTest',
@@ -14,7 +20,13 @@ describe('Authenticate User', () => {
 
   beforeAll(async () => {
     userRepository = new UserRepositoryInMemory()
-    authenticateUserService = new AuthenticateUserService(userRepository)
+    dateProvider = new DayjsDateProvider()
+    userTokenReposiotyr = new UserTokenRepositoryInMemory()
+    authenticateUserService = new AuthenticateUserService(
+      userRepository,
+      userTokenReposiotyr,
+      dateProvider
+    )
   })
   
   it('Should be able to authenticate an user', async () => {

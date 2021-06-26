@@ -7,8 +7,8 @@ import AppError from '@shared/errors/AppError'
 import CarAndUserAvailable from '@myTypes/CarAndUserAvailable'
 import RentalDuration from '@myTypes/RentalDuration'
 import FormatedDate from '@myTypes/FormatedDate'
-import dayjsDateProvider from '@shared/container/providers/DateProvider/implementations/DayjsDateProvider'
 import ICarRepository from '@cars/repositories/interfaces/ICarRepository'
+import IDateProvider from '@shared/container/providers/DateProvider/IDateProvider'
 
 @injectable()
 class CreateRentalService
@@ -17,7 +17,9 @@ class CreateRentalService
     @inject('RentalRepository')
     private rentalRepository: IRentalRepository,
     @inject('CarRepository')
-    private carRepository: ICarRepository
+    private carRepository: ICarRepository,
+    @inject('DateProvider')
+    private dateProvider: IDateProvider
   ) {  }
 
   public async execute({
@@ -60,7 +62,7 @@ class CreateRentalService
   private verifyRentalDuration({ expect_return_date, start_date }: RentalDuration): void
   {
     const formatDate = 'DD/MM/YYYY HH:mm'
-    const rentIsLessThan24h = dayjsDateProvider
+    const rentIsLessThan24h = this.dateProvider
       .compareDuration({
         value: 1,
         unit: 'day',
@@ -77,7 +79,7 @@ class CreateRentalService
   {
     const formatDate = 'DD/MM/YYYY HH:mm' 
 
-    return dayjsDateProvider.formatDate({
+    return this.dateProvider.formatDate({
       formatDate,
       start_date,
       expect_return_date

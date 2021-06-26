@@ -53,7 +53,7 @@ describe('Create Category in database', () => {
         password: password
       })
 
-    token = `Bearer ${response.body.token}`
+    token = `Bearer ${response.body.refresh_token}`
   })
   afterAll(async () => {
     await connection.dropDatabase()
