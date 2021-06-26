@@ -9,7 +9,7 @@ import uploadConfig from '@config/UploadConfig'
 
 
 const carImagesRoutes = Router()
-const upload = multer(uploadConfig.options('cars_image'))
+const upload = multer(uploadConfig.options('tmp/cars'))
 
 carImagesRoutes.route('/:car_id')
   .post(

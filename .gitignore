@@ -3,6 +3,4 @@ node_modules/
 .eslintrc.json
 .eslintignore
 .env
-avatar/
-cars_image/
-coverage/
+tmp/
