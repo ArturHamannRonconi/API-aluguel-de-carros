@@ -9,7 +9,7 @@ import importCategoryController from '@cars/controllers/categoryControllers/Impo
 import uploadConfig from '@config/UploadConfig'
 
 const categoriesRoutes = Router()
-const uploadCsvCategories = multer(uploadConfig.options('tmp'))
+const uploadCsvCategories = multer(uploadConfig.options)
 
 categoriesRoutes.route('/')
   .get(listCategoryController.handle)

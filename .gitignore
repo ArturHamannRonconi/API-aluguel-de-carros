@@ -4,3 +4,4 @@ node_modules/
 .eslintignore
 .env
 tmp/
+coverage/

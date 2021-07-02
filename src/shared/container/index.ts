@@ -27,6 +27,9 @@ import DateProvider from '@shared/container/providers/DateProvider/implementatio
 import IMailProvider from '@shared/container/providers/MailProvider/IMailProvider'
 import MailProvider from '@shared/container/providers/MailProvider/implementations/EtherealMailProvider'
 
+import IStorageProvider from '@shared/container/providers/StorageProvider/IStorageProvider'
+import StorageProvider from '@shared/container/providers/StorageProvider/implementations/LocalStorageProvider'
+
 container.registerSingleton<ICategoryRepository>('CategoryRepository', CategoryRepository)
 container.registerSingleton<ISpecificationRepository>('SpecificationRepository', SpecificationRepository)
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository)
@@ -36,3 +39,4 @@ container.registerSingleton<IRentalRepository>('RentalRepository', RentalReposit
 container.registerSingleton<IUserTokenRepository>('UserTokenRepository', UserTokenRepository)
 container.registerSingleton<IDateProvider>('DateProvider', DateProvider)
 container.registerInstance<IMailProvider>('MailProvider', new MailProvider())
+container.registerSingleton<IStorageProvider>('StorageProvider', StorageProvider)

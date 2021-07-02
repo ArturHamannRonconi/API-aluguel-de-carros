@@ -1,15 +1,17 @@
-import multer from 'multer'
+import multer, { Options } from 'multer'
 import crypto from 'crypto'
 import { resolve } from 'path'
 class UploadConfig
 {
-  public options(folder: string): multer.Options
+  public destination: string
+  public options: Options
+
+  constructor()
   {
-    const options =  {
+    this.destination = resolve(__dirname, '..', '..', 'tmp')
+    this.options = {
       storage: multer.diskStorage({
-        
-        destination: resolve(__dirname, '..', '..', folder),
-        
+        destination: this.destination,
         filename: (request, file, callback) => {
           const fileHash = crypto.randomBytes(16).toString('hex')
           const fileName = `${fileHash}-${file.originalname}`
@@ -18,8 +20,6 @@ class UploadConfig
         }  
       })
     }
-
-    return options
   }
 }
 

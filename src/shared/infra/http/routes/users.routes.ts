@@ -11,7 +11,7 @@ import authenticationHandler from '@shared/infra/http/middlewares/Authentication
 import uploadConfig from '@config/UploadConfig'
 
 const usersRoutes = Router()
-const uploadAvatar = multer(uploadConfig.options('tmp/avatar'))
+const uploadAvatar = multer(uploadConfig.options)
 
 usersRoutes.route('/')
   .post(createUserController.handle)
