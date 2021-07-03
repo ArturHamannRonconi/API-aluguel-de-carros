@@ -4,6 +4,7 @@ import multer from 'multer'
 import sendForgotPasswordMailController from '@accounts/controllers/userControllers/SendForgotPasswordMailController'
 import updateUserAvatarController from '@accounts/controllers/userControllers/UpdateUserAvatarController'
 import authenticateUserController from '@accounts/controllers/userControllers/AuthenticateUserController'
+import showUserProfileController from '@accounts/controllers/userControllers/ShowUserProfileController'
 import resetPasswordController from '@accounts/controllers/userControllers/ResetPasswordController'
 import refreshTokenController from '@accounts/controllers/userControllers/RefreshTokenController'
 import createUserController from '@accounts/controllers/userControllers/CreateUserController'
@@ -15,6 +16,10 @@ const uploadAvatar = multer(uploadConfig.options)
 
 usersRoutes.route('/')
   .post(createUserController.handle)
+  .get(
+    authenticationHandler.exec,
+    showUserProfileController.handle
+  )
 
 usersRoutes.route('/authenticate')
   .post(authenticateUserController.handle)

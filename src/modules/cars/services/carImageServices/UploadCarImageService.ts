@@ -22,6 +22,7 @@ class UploadCarImageService
   public async execute({ car_id, images_name }: CreateCarImage): Promise<ICarImage[]>
   {
     await this.verifyCarExists(car_id)
+    await this.saveCarImage(images_name)
     return this.createCarImages({ car_id, images_name })
   }
 
@@ -38,6 +39,13 @@ class UploadCarImageService
         this.carImageRepository.create({ car_id, image_name })
       )
     )
+  }
+
+  private async saveCarImage(images_name: string[]): Promise<string[]>
+  {
+    return Promise.all(images_name.map(image_name =>
+      this.storageProvider.save(image_name, 'cars')
+    ))
   }
 }
 
