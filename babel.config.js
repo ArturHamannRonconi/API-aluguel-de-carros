@@ -8,14 +8,14 @@ module.exports = {
       "module-resolver",
       {
         alias: {
-          "@accounts": ["./src/modules/accounts"], 
-          "@cars": ["./src/modules/cars"], 
-          "@rentals": ["./src/modules/rentals"], 
-          "@config": ["./src/config"], 
-          "@utils": ["./src/utils"],
-          "@shared": ["./src/shared"],
-          "@myTypes": ["./src/@types/myTypes"],
-          "@docs": ["./src/docs"]
+          "@accounts": "./src/modules/accounts", 
+          "@cars": "./src/modules/cars", 
+          "@rentals": "./src/modules/rentals", 
+          "@config": "./src/config", 
+          "@utils": "./src/utils",
+          "@shared": "./src/shared",
+          "@myTypes": "./src/@types/myTypes",
+          "@docs": "./src/docs"
         }
       }
     ],
