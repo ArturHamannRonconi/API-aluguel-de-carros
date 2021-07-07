@@ -10,6 +10,7 @@ import errorHandler from '@shared/errors/ErrorHandler'
 const app = express()
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 app.use(express.static('tmp'))
 app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 app.use(routes)
