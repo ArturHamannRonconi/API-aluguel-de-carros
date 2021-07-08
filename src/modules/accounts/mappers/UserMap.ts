@@ -5,9 +5,13 @@ class UserMap
 {
   public static filter({ name, username, email, avatar }: IUser): UserProfile
   {
-    const avatar_url = `${process.env.AVATAR_URL}/avatar/${avatar}`
+    const map = { name, username, email } as UserProfile
 
-    return { name, username, email, avatar_url }
+    avatar
+      ? map.avatar_url = `${process.env.AVATAR_URL}/avatar/${avatar}`
+      : null
+
+    return map
   }
 }
 
