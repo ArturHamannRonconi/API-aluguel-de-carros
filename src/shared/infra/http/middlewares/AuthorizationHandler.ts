@@ -4,7 +4,7 @@ import { NextFunction, Request, Response } from 'express'
 
 class AuthorizationHandler
 {
-  public async exec(request: Request, response: Response, next: NextFunction): Promise<Response | void>
+  public async exec(request: Request, response: Response, next: NextFunction): Promise<void>
   {
     const user_id = request.user_id
   
